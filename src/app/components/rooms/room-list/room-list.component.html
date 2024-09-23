@@ -1,0 +1,6 @@
+<h2>Listado de Salas</h2>
+<ul>
+  <li *ngFor="let room of rooms">
+    Sala: {{ room.name }} - Ubicación: {{ room.location }} - Capacidad: {{ room.capacity }} - Disponible: {{ room.available ? 'Sí' : 'No' }}
+  </li>
+</ul>
