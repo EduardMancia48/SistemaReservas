@@ -3,11 +3,12 @@ import { ReservationService } from '../../../service/reservation.service';
 import { Reservation } from '../../../models/reservation.model';
 import { CommonModule } from '@angular/common';  
 import { RouterModule } from '@angular/router';
+import { materialModules } from '../../../models/material-imports';
 
 @Component({
   selector: 'app-reservation-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, materialModules],
   templateUrl: './reservation-list.component.html',
   styleUrls: ['./reservation-list.component.css']
 })
