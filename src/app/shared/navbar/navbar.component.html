@@ -2,18 +2,18 @@
   <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
     <span class="toolbar-title">Sistema de Reservas</span>
     <div fxHide fxShow.gt-xs fxLayout="row" fxLayoutGap="10px">
-      <button mat-button routerLink="/">Inicio</button>
-      <button mat-button routerLink="/rooms">Salas</button>
-      <button mat-button routerLink="/reservations">Reservaciones</button>
+      <button mat-button [routerLink]="['']">Inicio</button>
+      <button mat-button [routerLink]="['/rooms']">Salas</button>
+      <button mat-button [routerLink]="['/reservations']">Reservaciones</button>
     </div>
     <div fxHide fxShow.lt-sm>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/">Inicio</button>
-        <button mat-menu-item routerLink="/rooms">Salas</button>
-        <button mat-menu-item routerLink="/reservations">Reservaciones</button>
+        <button mat-menu-item [routerLink]="['/rooms/create']">Inicio</button>
+        <button mat-menu-item [routerLink]="['/rooms']">Salas</button>
+        <button mat-menu-item [routerLink]="['/reservations']">Reservaciones</button>
       </mat-menu>
     </div>
   </mat-toolbar-row>
