@@ -8,10 +8,11 @@ import { RoomDetailComponent } from './app/components/rooms/room-detail/room-det
 import { ReservationListComponent } from './app/components/reservation/reservation-list/reservation-list.component';
 import { ReservationDetailComponent } from './app/components/reservation/reservation-detail/reservation-detail.component';
 import { ReservationCreateComponent } from './app/components/reservation/reservation-create/reservation-create.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(HttpClientModule), // Añadir HttpClientModule aquí
+    importProvidersFrom(HttpClientModule, BrowserAnimationsModule), // Añadir HttpClientModule aquí
     provideRouter([
       { path: 'rooms', component: RoomListComponent },
       { path: 'rooms/create', component: RoomDetailComponent },
