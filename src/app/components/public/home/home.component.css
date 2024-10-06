@@ -1,0 +1,17 @@
+.home-container {
+    margin: 20px;
+  }
+  
+  .rooms-info, .pricing-info, .contact-info {
+    margin-bottom: 40px;
+  }
+  
+  .room-card {
+    width: 300px;
+  }
+  
+  .contact-info p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  

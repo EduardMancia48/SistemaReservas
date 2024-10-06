@@ -10,6 +10,7 @@ import { ReservationDetailComponent } from './app/components/reservation/reserva
 import { ReservationCreateComponent } from './app/components/reservation/reservation-create/reservation-create.component';
 import { HomeComponent } from './app/components/public/home/home.component'; // Asegúrate de importar el HomeComponent
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -25,6 +26,6 @@ bootstrapApplication(AppComponent, {
       { path: 'reservations/:id', component: ReservationDetailComponent },
       { path: '', redirectTo: '/', pathMatch: 'full' }, // Redirigir a la página principal por defecto
       { path: '**', redirectTo: '/' } // Redirigir cualquier ruta no encontrada a Home
-    ])
+    ]), provideAnimationsAsync(), provideAnimationsAsync()
   ]
 }).catch(err => console.error(err));

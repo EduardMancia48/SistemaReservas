@@ -4,21 +4,9 @@
 *::after {
     box-sizing: border-box;
 }
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif; /* Establecer Roboto como la fuente predeterminada */
-    line-height: 1.6; /* Mejorar la legibilidad del texto */
-    font-size: 16px; /* Establecer un tamaño de fuente base */
-}
-
-/* Establecer height: 100% en html y body */
-html, body {
-    height: 100%;
-}
-
 /* Botones */
 .btn {
     margin: 10px; /* Espaciado entre botones */
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
