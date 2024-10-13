@@ -3,7 +3,7 @@
     <span class="toolbar-title">Sistema de Reservas</span>
     <div fxHide fxShow.gt-xs fxLayout="row" fxLayoutGap="10px">
       <button mat-button [routerLink]="['/']">Inicio</button>
-      <button mat-button [routerLink]="['/rooms']">Salas</button>
+      <button mat-button [matMenuTriggerFor]="roomsMenu">Salas</button>
       <button mat-button [routerLink]="['/reservations']">Reservaciones</button>
     </div>
     <div fxHide fxShow.lt-sm>
@@ -12,9 +12,17 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item [routerLink]="['/']">Inicio</button>
-        <button mat-menu-item [routerLink]="['/rooms']">Salas</button>
+        <button mat-menu-item [matMenuTriggerFor]="roomsMenu">Salas</button>
         <button mat-menu-item [routerLink]="['/reservations']">Reservaciones</button>
       </mat-menu>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-menu #roomsMenu="matMenu">
+  <button mat-menu-item [routerLink]="['/rooms']">Lista de Salas</button>
+  <button mat-menu-item [routerLink]="['/rooms/availability']">Disponibilidad</button>
+  <button mat-menu-item [routerLink]="['/rooms/create']">Crear Sala</button>
+  <button mat-menu-item [routerLink]="['/rooms/edit', roomId]">Editar Sala</button> <!-- Ejemplo con variable roomId -->
+  <button mat-menu-item [routerLink]="['/rooms/detail', roomId]">Detalle de Sala</button> <!-- Ejemplo con variable roomId -->
+</mat-menu>

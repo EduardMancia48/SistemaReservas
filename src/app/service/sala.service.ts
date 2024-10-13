@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class SalaService {
 
-  private apiUrl = 'http://localhost:3000/salas'; // URL del backend
+  private apiUrl = 'http://localhost:3000/sala'; // URL del backend
 
   constructor(private http: HttpClient) { }
 

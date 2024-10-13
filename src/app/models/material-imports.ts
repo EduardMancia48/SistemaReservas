@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatListModule} from '@angular/material/list';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const materialModules = [
   MatButtonModule,
@@ -40,4 +41,5 @@ export const materialModules = [
   MatTreeModule,
   FlexLayoutModule,
   MatListModule,
+  ReactiveFormsModule,
 ];

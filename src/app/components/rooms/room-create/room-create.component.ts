@@ -5,13 +5,13 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-room-create',
   standalone: true,
-  imports: [materialModules],
+  imports: [...materialModules],
   templateUrl: './room-create.component.html',
   styleUrl: './room-create.component.css'
 })
 export class RoomCreateComponent implements OnInit {
 
-  roomForm: FormGroup;
+  roomForm!: FormGroup;
 
 
 
