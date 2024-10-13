@@ -1,32 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { RoomService } from '../../../service/room.service';
-import { Room } from '../../../models/room.models';
 import { CommonModule } from '@angular/common';
+import { materialModules } from '../../../models/material-imports';
+import { SalaService } from '../../../service/sala.service';
 
 @Component({
   selector: 'app-room-list',
   standalone: true,
-  imports: [CommonModule],  // Importa CommonModule para usar directivas como *ngFor
+  imports: [CommonModule, ...materialModules, ],  // Importa CommonModule para usar directivas como *ngFor
   templateUrl: './room-list.component.html',
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
-  rooms: Room[] = [];
+  salas: any[] = [];
 
-  constructor(private roomService: RoomService) {}
+  constructor(private salaService: SalaService) {}
 
   ngOnInit(): void {
-    this.getRooms();
-  }
-
-  getRooms(): void {
-    this.roomService.getRooms().subscribe(
-      (data) => {
-        this.rooms = data;
-      },
-      (error) => {
-        console.error('Error fetching rooms:', error);
-      }
-    );
+    this.salaService.getSalas().subscribe((data) => {
+      this.salas = data;
+    });
   }
 }
