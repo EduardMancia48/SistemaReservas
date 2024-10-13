@@ -1,0 +1,38 @@
+/* room-availability.component.css */
+.room-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.room-card {
+  margin: 10px;
+  flex: 1 1 calc(33.333% - 20px); /* Ajusta el ancho de las tarjetas para pantallas grandes */
+  box-sizing: border-box;
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.room-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+mat-card-header {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-title, mat-card-subtitle {
+  white-space: normal;
+}
+
+@media (max-width: 960px) {
+  .room-card {
+    flex: 1 1 calc(48% - 20px); /* Ajusta el ancho de las tarjetas para pantallas medianas */
+  }
+}
+
+@media (max-width: 600px) {
+  .room-card {
+    flex: 1 1 100%; /* Ajusta el ancho de las tarjetas para pantallas pequeñas */
+  }
+}

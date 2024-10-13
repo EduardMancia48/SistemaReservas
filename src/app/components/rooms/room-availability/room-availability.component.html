@@ -1,1 +1,12 @@
-<p>room-availability works!</p>
+<h2>Disponibilidad de Salas</h2>
+<div class="room-list">
+  <mat-card class="room-card" *ngFor="let sala of salas">
+    <mat-card-header>
+      <mat-card-title>{{ sala.nombre_sala }}</mat-card-title>
+      <mat-card-subtitle>Capacidad: {{ sala.capacidad_sala }} personas</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Estado: {{ sala.disponibilidad_sala == 1 ? 'Disponible' : 'No Disponible' }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

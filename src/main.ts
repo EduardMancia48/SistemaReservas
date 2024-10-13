@@ -11,6 +11,7 @@ import { ReservationCreateComponent } from './app/components/reservation/reserva
 import { HomeComponent } from './app/components/public/home/home.component'; // Asegúrate de importar el HomeComponent
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { RoomAvailabilityComponent } from './app/components/rooms/room-availability/room-availability.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -19,6 +20,7 @@ bootstrapApplication(AppComponent, {
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
       { path: 'rooms', component: RoomListComponent },
+      {path: 'rooms/availability', component: RoomAvailabilityComponent},
       { path: 'rooms/create', component: RoomDetailComponent },
       { path: 'rooms/edit/:id', component: RoomDetailComponent },
       { path: 'reservations', component: ReservationListComponent },

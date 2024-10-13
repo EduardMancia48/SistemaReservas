@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatListModule} from '@angular/material/list';
 
 export const materialModules = [
   MatButtonModule,
@@ -38,4 +39,5 @@ export const materialModules = [
   MatTooltipModule,
   MatTreeModule,
   FlexLayoutModule,
+  MatListModule,
 ];
