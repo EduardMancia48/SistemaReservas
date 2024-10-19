@@ -1,3 +1,8 @@
+import { HomeComponent } from './app/components/public/home/home.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { RoomAvailabilityComponent } from './app/components/rooms/room-availability/room-availability.component';
+import { RoomCreateComponent } from './app/components/rooms/room-create/room-create.component';
+import { RoomEditComponent } from './app/components/rooms/room-edit/room-edit.component';
 import { HttpClientModule } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { importProvidersFrom } from '@angular/core';
@@ -8,12 +13,15 @@ import { RoomDetailComponent } from './app/components/rooms/room-detail/room-det
 import { ReservationListComponent } from './app/components/reservation/reservation-list/reservation-list.component';
 import { ReservationDetailComponent } from './app/components/reservation/reservation-detail/reservation-detail.component';
 import { ReservationCreateComponent } from './app/components/reservation/reservation-create/reservation-create.component';
-import { HomeComponent } from './app/components/public/home/home.component'; // Asegúrate de importar el HomeComponent
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { RoomAvailabilityComponent } from './app/components/rooms/room-availability/room-availability.component';
-import { RoomCreateComponent } from './app/components/rooms/room-create/room-create.component';
-import { RoomEditComponent } from './app/components/rooms/room-edit/room-edit.component';
+import { RoleService } from './app/services/role.service';
+import { UserService } from './app/services/user.service';
+import { RoomService } from './app/services/room.service';
+import { ReservationService } from './app/services/reservation.service';
+import { ReservationStatusService } from './app/services/reservation-status.service';
+import { ContactService } from './app/services/contact.service';
+import { ReservationHistoryService } from './app/services/reservation-history.service';
+
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -31,6 +39,15 @@ bootstrapApplication(AppComponent, {
       { path: 'reservations/:id', component: ReservationDetailComponent },
       { path: '', redirectTo: '/', pathMatch: 'full' }, // Redirigir a la página principal por defecto
       { path: '**', redirectTo: '/' } // Redirigir cualquier ruta no encontrada a Home
-    ]), provideAnimationsAsync(), provideAnimationsAsync()
+    ]),
+    RoleService,
+    UserService,
+    RoomService,
+    ReservationService,
+    ReservationStatusService,
+    ContactService,
+    ReservationHistoryService,
+    provideAnimationsAsync(),
+    provideAnimationsAsync()
   ]
 }).catch(err => console.error(err));
