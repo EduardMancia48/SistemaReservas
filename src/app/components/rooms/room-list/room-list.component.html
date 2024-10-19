@@ -1,8 +1,25 @@
 <div class="room-list">
-<h2>Listado de Salas</h2>
-<ul>
-  <li *ngFor="let sala of salas">
-    {{ sala.nombre_sala }} - Capacidad: {{ sala.capacidad_sala }} personas - Ubicación: {{ sala.ubicacion_sala }} 
-  </li>
-</ul>
+  <h2>Lista de Salas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Capacidad</th>
+        <th>Ubicación</th>
+        <th>Precio</th>
+        <th>Disponible</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of rooms">
+        <td>{{ room.sala_id }}</td>
+        <td>{{ room.nombre }}</td>
+        <td>{{ room.capacidad }}</td>
+        <td>{{ room.ubicacion }}</td>
+        <td>{{ room.precio | currency }}</td>
+        <td>{{ room.disponible ? 'Sí' : 'No' }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

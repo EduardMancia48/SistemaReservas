@@ -1,12 +1,12 @@
 <h2>Disponibilidad de Salas</h2>
 <div class="room-list">
-  <mat-card class="room-card" *ngFor="let sala of salas">
+  <mat-card class="room-card" *ngFor="let room of rooms">
     <mat-card-header>
-      <mat-card-title>{{ sala.nombre_sala }}</mat-card-title>
-      <mat-card-subtitle>Capacidad: {{ sala.capacidad_sala }} personas</mat-card-subtitle>
+      <mat-card-title>{{ room.nombre }}</mat-card-title>
+      <mat-card-subtitle>Capacidad: {{ room.capacidad }} personas</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <p>Estado: {{ sala.disponibilidad_sala == 1 ? 'Disponible' : 'Ocupada' }}</p>
+      <p>Estado: {{ room.disponible ? 'Disponible' : 'Ocupada' }}</p>
     </mat-card-content>
   </mat-card>
 </div>

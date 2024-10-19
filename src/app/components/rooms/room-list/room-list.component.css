@@ -1,0 +1,22 @@
+.room-list {
+    padding: 20px;
+  }
+  
+  .room-list h2 {
+    margin-bottom: 20px;
+  }
+  
+  .room-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .room-list th, .room-list td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  .room-list th {
+    background-color: #f4f4f4;
+  }

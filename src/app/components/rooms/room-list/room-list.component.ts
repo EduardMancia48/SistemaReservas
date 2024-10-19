@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { materialModules } from '../../../models/material-imports';
-import { SalaService } from '../../../service/sala.service';
+import { RoomService } from '../../../services/room.service';
+import { Room } from '../../../models/room';
 
 @Component({
   selector: 'app-room-list',
@@ -11,13 +12,17 @@ import { SalaService } from '../../../service/sala.service';
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
-  salas: any[] = [];
+  rooms: Room[] = [];
 
-  constructor(private salaService: SalaService) {}
+  constructor(private roomService: RoomService) {}
 
   ngOnInit(): void {
-    this.salaService.getSalas().subscribe((data) => {
-      this.salas = data;
+    this.getRooms();
+  }
+
+  getRooms(): void {
+    this.roomService.getRooms().subscribe((data: Room[]) => {
+      this.rooms = data;
     });
   }
 }

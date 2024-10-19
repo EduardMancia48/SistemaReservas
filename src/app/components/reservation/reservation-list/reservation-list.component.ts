@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ReservationService } from '../../../service/reservation.service';
-import { Reservation } from '../../../models/reservation.model';
+import { ReservationService } from '../../../services/reservation.service';
+import { Reservation } from '../../../models/reservation';
 import { CommonModule } from '@angular/common';  
 import { RouterModule } from '@angular/router';
 import { materialModules } from '../../../models/material-imports';
