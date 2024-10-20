@@ -83,3 +83,80 @@ CREATE TABLE `historiales_reserva` (
   KEY `fk_reserva_historial` (`reserva_id`),
   CONSTRAINT `fk_reserva_historial` FOREIGN KEY (`reserva_id`) REFERENCES `reservas` (`reserva_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--//////////////////////
+--//SCRIPT EN POSTGRESQL
+--//////////////////////
+
+-- Eliminando las tablas si existen previamente
+DROP TABLE IF EXISTS contactos CASCADE;
+DROP TABLE IF EXISTS historiales_reserva CASCADE;
+DROP TABLE IF EXISTS reservas CASCADE;
+DROP TABLE IF EXISTS estados_reserva CASCADE;
+DROP TABLE IF EXISTS usuarios CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
+DROP TABLE IF EXISTS salas CASCADE;
+
+-- Tabla Roles
+CREATE TABLE roles (
+  rol_id SERIAL PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Tabla Usuarios
+CREATE TABLE usuarios (
+  usuario_id SERIAL PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  rol_id INT NOT NULL,
+  CONSTRAINT fk_rol_usuario FOREIGN KEY (rol_id) REFERENCES roles (rol_id) ON DELETE CASCADE
+);
+
+-- Tabla Contactos
+CREATE TABLE contactos (
+  contacto_id SERIAL PRIMARY KEY,
+  usuario_id INT NOT NULL,
+  telefono VARCHAR(15),
+  direccion VARCHAR(255),
+  CONSTRAINT fk_usuario_contacto FOREIGN KEY (usuario_id) REFERENCES usuarios (usuario_id) ON DELETE CASCADE
+);
+
+-- Tabla Salas
+CREATE TABLE salas (
+  sala_id SERIAL PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  capacidad SMALLINT NOT NULL CHECK (capacidad > 0),
+  ubicacion VARCHAR(255) NOT NULL,
+  precio NUMERIC(10,2) NOT NULL,
+  disponible BOOLEAN DEFAULT TRUE
+);
+
+-- Tabla Estados Reserva
+CREATE TABLE estados_reserva (
+  estado_reserva_id SERIAL PRIMARY KEY,
+  estado VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Tabla Reservas
+CREATE TABLE reservas (
+  reserva_id SERIAL PRIMARY KEY,
+  usuario_id INT NOT NULL,
+  sala_id INT NOT NULL,
+  fecha_reserva DATE NOT NULL,
+  hora_inicio TIME NOT NULL,
+  hora_fin TIME NOT NULL,
+  estado_reserva_id INT NOT NULL,
+  CONSTRAINT fk_usuario_reserva FOREIGN KEY (usuario_id) REFERENCES usuarios (usuario_id) ON DELETE CASCADE,
+  CONSTRAINT fk_sala_reserva FOREIGN KEY (sala_id) REFERENCES salas (sala_id) ON DELETE CASCADE,
+  CONSTRAINT fk_estado_reserva FOREIGN KEY (estado_reserva_id) REFERENCES estados_reserva (estado_reserva_id),
+  CONSTRAINT idx_fecha_sala_usuario UNIQUE (fecha_reserva, sala_id, usuario_id)
+);
+
+-- Tabla Historiales Reserva
+CREATE TABLE historiales_reserva (
+  historial_id SERIAL PRIMARY KEY,
+  reserva_id INT NOT NULL,
+  fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_reserva_historial FOREIGN KEY (reserva_id) REFERENCES reservas (reserva_id) ON DELETE CASCADE
+);
