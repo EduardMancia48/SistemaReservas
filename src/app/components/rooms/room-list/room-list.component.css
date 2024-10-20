@@ -1,22 +1,16 @@
 .room-list {
-    padding: 20px;
-  }
-  
-  .room-list h2 {
-    margin-bottom: 20px;
-  }
-  
-  .room-list table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .room-list th, .room-list td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: left;
-  }
-  
-  .room-list th {
-    background-color: #f4f4f4;
-  }
+  padding: 20px;
+}
+
+.mat-elevation-z8 {
+  overflow: auto;
+}
+
+.mat-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.mat-header-cell, .mat-cell {
+  padding: 8px;
+}
