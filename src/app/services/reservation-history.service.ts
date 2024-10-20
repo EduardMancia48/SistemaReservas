@@ -7,7 +7,7 @@ import { ReservationHistory } from '../models/reservation-history';
   providedIn: 'root'
 })
 export class ReservationHistoryService {
-  private apiUrl = 'http://localhost:3000/api/reservation-histories';
+  private apiUrl = 'https://flowery-caterwauling-echium.glitch.me/reservation-histories';
 
   constructor(private http: HttpClient) {}
 

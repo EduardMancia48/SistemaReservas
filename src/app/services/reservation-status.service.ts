@@ -7,7 +7,7 @@ import { ReservationStatus } from '../models/reservation-status';
   providedIn: 'root'
 })
 export class ReservationStatusService {
-  private apiUrl = 'http://localhost:3000/estados_reserva';
+  private apiUrl = 'https://flowery-caterwauling-echium.glitch.me/estados_reserva';
 
   constructor(private http: HttpClient) {}
 

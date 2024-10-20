@@ -7,7 +7,7 @@ import { Contact } from '../models/contact';
   providedIn: 'root'
 })
 export class ContactService {
-  private apiUrl = 'http://localhost:3000/api/contacts';
+  private apiUrl = 'https://flowery-caterwauling-echium.glitch.me/contacts';
 
   constructor(private http: HttpClient) {}
 

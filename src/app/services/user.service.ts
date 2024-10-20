@@ -7,7 +7,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/usuarios';
+  private apiUrl = 'https://flowery-caterwauling-echium.glitch.me/usuarios';
 
   constructor(private http: HttpClient) {}
 

@@ -7,7 +7,7 @@ import { Room } from '../models/room';
   providedIn: 'root'
 })
 export class RoomService {
-  private apiUrl = 'http://localhost:3000/salas';
+  private apiUrl = 'https://flowery-caterwauling-echium.glitch.me/salas';
 
   constructor(private http: HttpClient) {}
 
