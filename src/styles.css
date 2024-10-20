@@ -14,3 +14,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.mat-toolbar {
+  background-color: #D7E3FF !important; /* Color de fondo de la toolbar */
+  color: #005CBB !important; /* Color del texto de la toolbar */
+}
