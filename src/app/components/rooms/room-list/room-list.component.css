@@ -4,6 +4,7 @@
 
 .mat-elevation-z8 {
   overflow: auto;
+  margin-top: 20px;
 }
 
 .mat-table-responsive {
@@ -13,4 +14,15 @@
 
 .mat-header-cell, .mat-cell {
   padding: 8px;
+}
+.mat-mini-fab {
+  margin: 0 10px; /* Aumentar el margen horizontal entre los botones */
+}
+.mat-cell .mat-mini-fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.mat-cell .mat-icon {
+  font-size: 20px;
 }

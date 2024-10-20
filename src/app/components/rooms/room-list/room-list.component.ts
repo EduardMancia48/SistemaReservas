@@ -6,16 +6,17 @@ import { MatPaginator } from '@angular/material/paginator';
 import { materialModules } from '../../../models/material-imports';
 import { RoomService } from '../../../services/room.service';
 import { Room } from '../../../models/room';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-room-list',
   standalone: true,
-  imports: [CommonModule, ...materialModules],
+  imports: [CommonModule, ...materialModules, RouterModule],
   templateUrl: './room-list.component.html',
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
-  displayedColumns: string[] = ['sala_id', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible'];
+  displayedColumns: string[] = ['sala_id', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones'];
   dataSource: MatTableDataSource<Room> = new MatTableDataSource<Room>();
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -42,5 +43,11 @@ export class RoomListComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  deleteRoom(id: number): void {
+    this.roomService.deleteRoom(id).subscribe(() => {
+      this.getRooms(); // Refresh the list after deletion
+    });
   }
 }
