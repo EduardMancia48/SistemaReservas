@@ -2,11 +2,15 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 /* Botones */
 .btn {
-    margin: 10px; /* Espaciado entre botones */
+  margin: 10px; /* Espaciado entre botones */
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
