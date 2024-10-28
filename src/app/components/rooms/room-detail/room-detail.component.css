@@ -42,3 +42,14 @@
 .buscador {
 	padding: 15px;
 }
+
+.room-card {
+	cursor: pointer; /* Cambia el cursor a pointer */
+	transition: transform 0.2s ease; /* Suaviza el efecto */
+  }
+  
+  .room-card:hover {
+	transform: scale(1.02); /* Opcional: Un pequeño efecto de agrandamiento */
+	box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Opcional: Sombra para resaltar el card */
+  }
+  

@@ -7,6 +7,8 @@ import { MatSort } from '@angular/material/sort';
 import { RoomService } from '../../../services/room.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { RoomDetailDialogComponent } from '../room-detail-dialog/room-detail-dialog.component';
 
 
 @Component({
@@ -23,12 +25,22 @@ export class RoomDetailComponent {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private roomService: RoomService) {}
+  constructor(private roomService: RoomService, private dialog: MatDialog) {}
+
 
   ngOnInit(): void {
     this.getRooms();
   }
 
+  openRoomDetail(room: Room): void {
+    this.dialog.open(RoomDetailDialogComponent, {
+      width: '400px',
+      data: { room }
+    });
+  }
+
+  
+  
   getRooms(): void {
     this.roomService.getRooms().subscribe((data: Room[]) => {
       this.dataSource.data = data;

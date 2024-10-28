@@ -1,37 +1,26 @@
-<div class="room-detail-list">
-	<div class="buscador">
-		<h2>Detalle de Salas</h2>
-		<mat-form-field appearance="fill">
-			<mat-label>Buscar</mat-label>
-			<input matInput (input)="applyFilter($event)" placeholder="Filtrar salas..." />
-		</mat-form-field>
-	</div>
-
-	<div class="room-cards-container">
-		<mat-card class="room-card" appearance="outlined" *ngFor="let room of dataSource.filteredData">
-			<mat-card-header>
-				<div mat-card-avatar class="example-header-image"></div>
-				<mat-card-title>{{ room.nombre }}</mat-card-title>
-				<mat-card-subtitle>{{ room.ubicacion }}</mat-card-subtitle>
-			</mat-card-header>
-
-	
-      <img mat-card-image src={{room.img}} alt="Imagen de la sala" />
-			<mat-card-content>
-        
-				<p><strong>Capacidad:</strong> {{ room.capacidad }} Personas</p>
-				<p><strong>Precio:</strong> {{ room.precio | currency }}</p>
-				<p><strong>Disponible:</strong> {{ room.disponible ? 'Sí' : 'No' }}</p>
-			</mat-card-content>
-
-			<mat-card-actions>
-				<button mat-button color="primary" [routerLink]="['/rooms/edit', room.sala_id]">
-					<mat-icon>edit</mat-icon> Editar
-				</button>
-				<button mat-button color="warn" (click)="deleteRoom(room.sala_id)"><mat-icon>delete</mat-icon> Eliminar</button>
-			</mat-card-actions>
-		</mat-card>
-	</div>
-
-	<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-</div>
+<div class="room-cards-container">
+	<mat-card class="room-card" appearance="outlined" *ngFor="let room of dataSource.filteredData" (click)="openRoomDetail(room)">
+	  <mat-card-header>
+		<div mat-card-avatar class="example-header-image"></div>
+		<mat-card-title>{{ room.nombre }}</mat-card-title>
+		<mat-card-subtitle>{{ room.ubicacion }}</mat-card-subtitle>
+	  </mat-card-header>
+  
+	  <img mat-card-image src="{{ room.img }}" alt="Imagen de la sala" />
+	  <mat-card-content>
+		<p><strong>Capacidad:</strong> {{ room.capacidad }} Personas</p>
+		<p><strong>Precio:</strong> {{ room.precio | currency }}</p>
+		<p><strong>Disponible:</strong> {{ room.disponible ? 'Sí' : 'No' }}</p>
+	  </mat-card-content>
+  
+	  <mat-card-actions>
+		<button mat-button color="primary" [routerLink]="['/rooms/edit', room.sala_id]">
+		  <mat-icon>edit</mat-icon> Editar
+		</button>
+		<button mat-button color="warn" (click)="deleteRoom(room.sala_id); $event.stopPropagation()">
+		  <mat-icon>delete</mat-icon> Eliminar
+		</button>
+	  </mat-card-actions>
+	</mat-card>
+  </div>
+  

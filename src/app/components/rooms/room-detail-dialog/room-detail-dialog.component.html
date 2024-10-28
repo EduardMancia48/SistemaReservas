@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Detalle de Sala</h2>
+<mat-dialog-content>
+  <img [src]="data.room.img" alt="Imagen de la sala" style="width: 100%; max-height: 300px;" />
+  <p><strong>Nombre:</strong> {{ data.room.nombre }}</p>
+  <p><strong>Ubicación:</strong> {{ data.room.ubicacion }}</p>
+  <p><strong>Capacidad:</strong> {{ data.room.capacidad }} Personas</p>
+  <p><strong>Precio:</strong> {{ data.room.precio | currency }}</p>
+  <p><strong>Disponible:</strong> {{ data.room.disponible ? 'Sí' : 'No' }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>
