@@ -5,4 +5,5 @@ export interface Room {
   ubicacion: string;
   precio: number;
   disponible: boolean;
+  img:string;
 }

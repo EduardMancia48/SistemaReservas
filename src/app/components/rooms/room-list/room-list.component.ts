@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
-  displayedColumns: string[] = ['sala_id', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones'];
+  displayedColumns: string[] = ['sala_id', 'img', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones'];
   dataSource: MatTableDataSource<Room> = new MatTableDataSource<Room>();
 
   @ViewChild(MatSort) sort!: MatSort;

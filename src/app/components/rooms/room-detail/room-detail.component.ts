@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./room-detail.component.css']
 })
 export class RoomDetailComponent {
-  displayedColumns: string[] = ['sala_id', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones'];
+  displayedColumns: string[] = ['sala_id', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones', 'img'];
   dataSource: MatTableDataSource<Room> = new MatTableDataSource<Room>();
 
   @ViewChild(MatSort) sort!: MatSort;

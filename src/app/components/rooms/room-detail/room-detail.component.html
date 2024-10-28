@@ -15,9 +15,10 @@
 				<mat-card-subtitle>{{ room.ubicacion }}</mat-card-subtitle>
 			</mat-card-header>
 
-			<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Imagen de la sala" />
-
+	
+      <img mat-card-image src={{room.img}} alt="Imagen de la sala" />
 			<mat-card-content>
+        
 				<p><strong>Capacidad:</strong> {{ room.capacidad }} Personas</p>
 				<p><strong>Precio:</strong> {{ room.precio | currency }}</p>
 				<p><strong>Disponible:</strong> {{ room.disponible ? 'Sí' : 'No' }}</p>
