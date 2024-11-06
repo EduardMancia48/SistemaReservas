@@ -21,6 +21,7 @@ import { ReservationService } from './app/services/reservation.service';
 import { ReservationStatusService } from './app/services/reservation-status.service';
 import { ContactService } from './app/services/contact.service';
 import { ReservationHistoryService } from './app/services/reservation-history.service';
+import { ProfileComponent } from './app/components/user/user-profile/user-profile.component';
 
 
 bootstrapApplication(AppComponent, {
@@ -37,6 +38,7 @@ bootstrapApplication(AppComponent, {
       { path: 'reservations', component: ReservationListComponent },
       { path: 'reservations/create', component: ReservationCreateComponent },
       { path: 'reservations/:id', component: ReservationDetailComponent },
+      {path: 'profile', component: ProfileComponent},
       { path: '', redirectTo: '/', pathMatch: 'full' }, // Redirigir a la página principal por defecto
       { path: '**', redirectTo: '/' } // Redirigir cualquier ruta no encontrada a Home
     ]),
