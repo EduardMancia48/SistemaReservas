@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service'; // Asegúrate de tener este servicio
+import { User } from '../../../models/user';
 import { materialModules } from '../../../models/material-imports';
 
 @Component({
@@ -10,7 +11,7 @@ import { materialModules } from '../../../models/material-imports';
   styleUrl: './user-profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  user: any = {}; // Aquí se almacenarán los datos del usuario
+  user: User |null = null;
 
   constructor(private userService: UserService) {}
 
@@ -18,26 +19,20 @@ export class ProfileComponent implements OnInit {
     this.loadUserProfile();
   }
 
-  loadUserProfile() {
-    // Simula la carga de datos del usuario
-    this.user = {
-      nombre: 'Juan Pérez',
-      email: 'juan.perez@example.com',
-      rol: 'Cliente'
-    };
-
-    // En un entorno real, puedes usar el servicio para obtener los datos del usuario
-    // this.userService.getUserProfile().subscribe(data => {
-    //   this.user = data;
-    // });
+  loadUserProfile(): void {
+    this.userService.getUserProfile().subscribe((data: User) => {
+      this.user = data;
+    }, error => {
+      console.error('Error al obtener el perfil del usuario', error);
+    });
   }
 
-  editProfile() {
-    // Lógica para editar el perfil
+  editProfile(): void {
+    // Lógica para editar el perfil del usuario
     console.log('Editar perfil');
   }
 
-  changePassword() {
+  changePassword(): void {
     // Lógica para cambiar la contraseña
     console.log('Cambiar contraseña');
   }

@@ -22,6 +22,8 @@ import { ReservationStatusService } from './app/services/reservation-status.serv
 import { ContactService } from './app/services/contact.service';
 import { ReservationHistoryService } from './app/services/reservation-history.service';
 import { ProfileComponent } from './app/components/user/user-profile/user-profile.component';
+import { UserLoginComponent } from './app/components/user/user-login/user-login.component';
+import { UserRegisterComponent } from './app/components/user/user-register/user-register.component';
 
 
 bootstrapApplication(AppComponent, {
@@ -34,11 +36,14 @@ bootstrapApplication(AppComponent, {
       { path: 'rooms/availability', component: RoomAvailabilityComponent },
       { path: 'rooms/create', component: RoomCreateComponent },
       { path: 'rooms/edit/:id', component: RoomEditComponent },
-      { path: 'rooms/detail/:id', component: RoomDetailComponent },
+      { path: 'rooms/detail/', component: RoomDetailComponent },
       { path: 'reservations', component: ReservationListComponent },
       { path: 'reservations/create', component: ReservationCreateComponent },
       { path: 'reservations/:id', component: ReservationDetailComponent },
       {path: 'profile', component: ProfileComponent},
+      {path: 'login', component: UserLoginComponent},
+      {path: 'register', component: UserRegisterComponent},
+
       { path: '', redirectTo: '/', pathMatch: 'full' }, // Redirigir a la página principal por defecto
       { path: '**', redirectTo: '/' } // Redirigir cualquier ruta no encontrada a Home
     ]),

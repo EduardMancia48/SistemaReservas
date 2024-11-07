@@ -6,9 +6,9 @@
       <div class="profile-details" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="10px">
         <mat-icon class="profile-icon">account_circle</mat-icon>
         <div fxFlex>
-          <p><strong>Nombre:</strong> {{ user.nombre }}</p>
-          <p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
-          <p><strong>Rol:</strong> {{ user.rol }}</p>
+          <p><strong>Nombre:</strong> {{ user?.nombre }}</p>
+          <p><strong>Correo Electrónico:</strong> {{ user?.email }}</p>
+          <p><strong>Rol:</strong> {{ user?.rol_id }}</p>
         </div>
       </div>
       <mat-divider></mat-divider>

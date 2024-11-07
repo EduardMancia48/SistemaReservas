@@ -5,9 +5,14 @@
       <button mat-button [routerLink]="['/']">Inicio</button>
       <button mat-button [matMenuTriggerFor]="roomsMenu">Salas</button>
       <button mat-button [routerLink]="['/reservations']">Reservaciones</button>
-      <button mat-button style="align-items: center;" [routerLink]="['/profile']">
-        <mat-icon style="font-size: 35px; height: auto; width: auto;">account_circle</mat-icon>Perfil
-      </button> <!-- Botón de perfil de usuario con icono -->
+      <ng-container *ngIf="isLoggedIn">
+        <button mat-button [routerLink]="['/profile']">
+          <mat-icon class="profile-icon">account_circle</mat-icon> Perfil
+        </button> <!-- Botón de perfil de usuario con icono -->
+      </ng-container>
+      <ng-container *ngIf="!isLoggedIn">
+        <button mat-button [routerLink]="['/login']">Iniciar Sesión</button> <!-- Botón de iniciar sesión -->
+      </ng-container>
     </div>
     <div fxHide fxShow.lt-sm>
       <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -17,9 +22,14 @@
         <button mat-menu-item [routerLink]="['/']">Inicio</button>
         <button mat-menu-item [matMenuTriggerFor]="roomsMenu">Salas</button>
         <button mat-menu-item [routerLink]="['/reservations']">Reservaciones</button>
-        <button mat-menu-item [routerLink]="['/profile']">
-          <mat-icon style="font-size: 35px; height: auto; width: auto;">account_circle</mat-icon>Perfil
-        </button> <!-- Opción de perfil de usuario en el menú con icono -->
+        <ng-container *ngIf="isLoggedIn">
+          <button mat-menu-item [routerLink]="['/profile']">
+            <mat-icon class="profile-icon">account_circle</mat-icon> Perfil
+          </button> <!-- Opción de perfil de usuario en el menú con icono -->
+        </ng-container>
+        <ng-container *ngIf="!isLoggedIn">
+          <button mat-menu-item [routerLink]="['/login']">Iniciar Sesión</button> <!-- Opción de iniciar sesión en el menú -->
+        </ng-container>
       </mat-menu>
     </div>
   </mat-toolbar-row>
@@ -28,5 +38,5 @@
 <mat-menu #roomsMenu="matMenu">
   <button mat-menu-item [routerLink]="['/rooms']">Lista de Salas</button>
   <button mat-menu-item [routerLink]="['/rooms/availability']">Disponibilidad</button>
-  <button mat-menu-item [routerLink]="['/rooms/detail', roomId]">Detalle de Sala</button> <!-- Ejemplo con variable roomId -->
+  <button mat-menu-item [routerLink]="['/rooms/detail']">Detalle de Sala</button> <!-- Ejemplo con variable roomId -->
 </mat-menu>

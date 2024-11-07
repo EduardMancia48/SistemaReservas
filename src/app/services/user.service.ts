@@ -30,4 +30,11 @@ export class UserService {
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  getUserProfile(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/profile`);
+  }
+  login(loginData: { email: string, password: string }): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/login`, loginData);
+  }
+  
 }
