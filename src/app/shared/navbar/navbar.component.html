@@ -6,12 +6,16 @@
       <button mat-button [matMenuTriggerFor]="roomsMenu">Salas</button>
       <button mat-button [routerLink]="['/reservations']">Reservaciones</button>
       <ng-container *ngIf="isLoggedIn">
-        <button mat-button [routerLink]="['/profile']">
+        <button mat-button [matMenuTriggerFor]="profileMenu">
           <mat-icon class="profile-icon">account_circle</mat-icon> Perfil
-        </button> <!-- Botón de perfil de usuario con icono -->
+        </button>
+        <mat-menu #profileMenu="matMenu">
+          <button mat-menu-item [routerLink]="['/profile']">Ver Perfil</button>
+          <button mat-menu-item (click)="logout()">Cerrar Sesión</button>
+        </mat-menu>
       </ng-container>
       <ng-container *ngIf="!isLoggedIn">
-        <button mat-button [routerLink]="['/login']">Iniciar Sesión</button> <!-- Botón de iniciar sesión -->
+        <button mat-button [routerLink]="['/login']">Iniciar Sesión</button>
       </ng-container>
     </div>
     <div fxHide fxShow.lt-sm>
@@ -23,12 +27,16 @@
         <button mat-menu-item [matMenuTriggerFor]="roomsMenu">Salas</button>
         <button mat-menu-item [routerLink]="['/reservations']">Reservaciones</button>
         <ng-container *ngIf="isLoggedIn">
-          <button mat-menu-item [routerLink]="['/profile']">
+          <button mat-menu-item [matMenuTriggerFor]="profileMenuSm">
             <mat-icon class="profile-icon">account_circle</mat-icon> Perfil
-          </button> <!-- Opción de perfil de usuario en el menú con icono -->
+          </button>
+          <mat-menu #profileMenuSm="matMenu">
+            <button mat-menu-item [routerLink]="['/profile']">Ver Perfil</button>
+            <button mat-menu-item (click)="logout()">Cerrar Sesión</button>
+          </mat-menu>
         </ng-container>
         <ng-container *ngIf="!isLoggedIn">
-          <button mat-menu-item [routerLink]="['/login']">Iniciar Sesión</button> <!-- Opción de iniciar sesión en el menú -->
+          <button mat-menu-item [routerLink]="['/login']">Iniciar Sesión</button>
         </ng-container>
       </mat-menu>
     </div>
@@ -38,5 +46,5 @@
 <mat-menu #roomsMenu="matMenu">
   <button mat-menu-item [routerLink]="['/rooms']">Lista de Salas</button>
   <button mat-menu-item [routerLink]="['/rooms/availability']">Disponibilidad</button>
-  <button mat-menu-item [routerLink]="['/rooms/detail']">Detalle de Sala</button> <!-- Ejemplo con variable roomId -->
+  <button mat-menu-item [routerLink]="['/rooms/detail']">Detalle de Sala</button>
 </mat-menu>

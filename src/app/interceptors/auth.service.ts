@@ -1,14 +1,35 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor() {}
+  private isLoggedInSubject: BehaviorSubject<boolean>;
 
-  isAuthenticated(): boolean {
-    // Aquí puedes agregar la lógica para verificar si el usuario está autenticado
-    // Por ejemplo, verificar un token en el almacenamiento local
-    return !!localStorage.getItem('authToken');
+  constructor() {
+    const token = localStorage.getItem('authToken');
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(!!token);
+  }
+
+  isAuthenticated(): Observable<boolean> {
+    return this.isLoggedInSubject.asObservable();
+  }
+
+  login(token: string, userId: number): void {
+    localStorage.setItem('authToken', token);
+    localStorage.setItem('userId', userId.toString());
+    this.isLoggedInSubject.next(true);
+  }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userId');
+    this.isLoggedInSubject.next(false);
+  }
+
+  getUserId(): number | null {
+    const userId = localStorage.getItem('userId');
+    return userId ? parseInt(userId, 10) : null;
   }
 }

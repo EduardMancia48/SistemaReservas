@@ -1,20 +1,23 @@
 <mat-card class="profile-container mat-elevation-z8">
-    <mat-card-header>
-      <mat-card-title>Perfil de Usuario</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="profile-details" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="10px">
-        <mat-icon class="profile-icon">account_circle</mat-icon>
-        <div fxFlex>
-          <p><strong>Nombre:</strong> {{ user?.nombre }}</p>
-          <p><strong>Correo Electrónico:</strong> {{ user?.email }}</p>
-          <p><strong>Rol:</strong> {{ user?.rol_id }}</p>
-        </div>
+  <mat-card-header>
+    <mat-card-title>Perfil de Usuario</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="profile-details" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="10px">
+      <mat-icon class="profile-icon">account_circle</mat-icon>
+      <div fxFlex>
+        <p><strong>Nombre:</strong> {{ user?.nombre }}</p>
+        <p><strong>Correo Electrónico:</strong> {{ user?.email }}</p>
+        <p><strong>Rol:</strong> 
+          <ng-container *ngIf="user?.rol_id === 1">Administrador</ng-container>
+          <ng-container *ngIf="user?.rol_id === 2">Cliente</ng-container>
+        </p>
       </div>
-      <mat-divider></mat-divider>
-      <div class="profile-actions" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-        <button mat-raised-button color="primary" (click)="editProfile()">Editar Perfil</button>
-        <button mat-raised-button color="warn" (click)="changePassword()">Cambiar Contraseña</button>
-      </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="profile-actions" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+      <button mat-raised-button color="primary" (click)="editProfile()">Editar Perfil</button>
+      <button mat-raised-button color="warn" (click)="changePassword()">Cambiar Contraseña</button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -31,8 +31,8 @@ export class UserService {
     return this.http.delete<void>(`${this.apiUrl}/usuarios/${id}`);
   }
 
-  getUserProfile(): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/profile`);
+  getUserProfile(id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/profile/${id}`);
   }
 
   login(loginData: { email: string, password: string }): Observable<void> {

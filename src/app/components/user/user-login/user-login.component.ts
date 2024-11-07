@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
-
+import { AuthService } from '../../../interceptors/auth.service';
 @Component({
   selector: 'app-user-login',
   standalone: true,
@@ -20,6 +20,7 @@ export class UserLoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private authService: AuthService, // Inyectar AuthService
     private router: Router,
     private snackBar: MatSnackBar // Inyectar MatSnackBar
   ) {
@@ -34,10 +35,11 @@ export class UserLoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
-      this.userService.login(loginData).subscribe(() => {
+      this.userService.login(loginData).subscribe((response: any) => {
         this.snackBar.open('Inicio de sesión exitoso', 'Cerrar', {
           duration: 3000,
         });
+        this.authService.login(response.token, response.userId); // Notificar al AuthService sobre el inicio de sesión exitoso
         this.router.navigate(['/']); // Redirigir a la página de inicio
       }, error => {
         console.error('Error al iniciar sesión', error);
