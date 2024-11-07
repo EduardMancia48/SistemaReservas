@@ -48,7 +48,7 @@ export class UserRegisterComponent implements OnInit {
         usuario_id: 0, // Este campo será ignorado por la base de datos si es autoincremental
         nombre: this.registerForm.value.nombre,
         email: this.registerForm.value.email,
-        password_hash: this.registerForm.value.password,
+        password: this.registerForm.value.password,
         rol_id: 2 // Asignar un rol por defecto o manejarlo según tu lógica
       };
       console.log("Datos enviados:", user);
