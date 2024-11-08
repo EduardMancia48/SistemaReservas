@@ -13,12 +13,16 @@ import { AuthService } from '../../interceptors/auth.service';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
+  userRole: number | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.authService.isAuthenticated().subscribe(isAuthenticated => {
       this.isLoggedIn = isAuthenticated;
+    });
+    this.authService.getUserRole().subscribe(role => {
+      this.userRole = role;
     });
   }
 

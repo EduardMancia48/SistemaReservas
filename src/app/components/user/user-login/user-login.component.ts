@@ -39,7 +39,7 @@ export class UserLoginComponent implements OnInit {
         this.snackBar.open('Inicio de sesión exitoso', 'Cerrar', {
           duration: 3000,
         });
-        this.authService.login(response.token, response.userId); // Notificar al AuthService sobre el inicio de sesión exitoso
+        this.authService.login(response.token, response.userId, response.role); // Notificar al AuthService sobre el inicio de sesión exitoso
         this.router.navigate(['/']); // Redirigir a la página de inicio
       }, error => {
         console.error('Error al iniciar sesión', error);

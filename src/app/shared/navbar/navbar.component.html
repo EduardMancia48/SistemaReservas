@@ -44,7 +44,9 @@
 </mat-toolbar>
 
 <mat-menu #roomsMenu="matMenu">
-  <button mat-menu-item [routerLink]="['/rooms']">Lista de Salas</button>
+  <ng-container *ngIf="isLoggedIn && userRole === 1">
+    <button mat-menu-item [routerLink]="['/rooms']">Lista de Salas</button>
+  </ng-container>
   <button mat-menu-item [routerLink]="['/rooms/availability']">Disponibilidad</button>
   <button mat-menu-item [routerLink]="['/rooms/detail']">Detalle de Sala</button>
 </mat-menu>
