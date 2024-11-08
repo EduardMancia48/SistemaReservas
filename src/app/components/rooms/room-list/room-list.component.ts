@@ -16,13 +16,15 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
-  displayedColumns: string[] = ['sala_id', 'img', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones'];
-  dataSource: MatTableDataSource<Room> = new MatTableDataSource<Room>();
+  displayedColumns: string[] = ['index', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones'];
+  dataSource: MatTableDataSource<Room>;
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private roomService: RoomService) {}
+  constructor(private roomService: RoomService) {
+    this.dataSource = new MatTableDataSource<Room>();
+  }
 
   ngOnInit(): void {
     this.getRooms();

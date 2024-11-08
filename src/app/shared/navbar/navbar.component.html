@@ -2,7 +2,7 @@
   <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
     <span class="toolbar-title">Sistema de Reservas</span>
     <div fxHide fxShow.gt-xs fxLayout="row" fxLayoutGap="10px">
-      <button mat-button [routerLink]="['/']">Inicio</button>
+      <button mat-button [routerLink]="['/']"><mat-icon>home</mat-icon>Inicio</button>
       <button mat-button [matMenuTriggerFor]="roomsMenu">Salas</button>
       <button mat-button [routerLink]="['/reservations']">Reservaciones</button>
       <ng-container *ngIf="isLoggedIn">
@@ -23,7 +23,7 @@
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item [routerLink]="['/']">Inicio</button>
+        <button mat-menu-item [routerLink]="['/']"><mat-icon>home</mat-icon>Inicio</button>
         <button mat-menu-item [matMenuTriggerFor]="roomsMenu">Salas</button>
         <button mat-menu-item [routerLink]="['/reservations']">Reservaciones</button>
         <ng-container *ngIf="isLoggedIn">

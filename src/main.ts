@@ -25,7 +25,6 @@ import { ProfileComponent } from './app/components/user/user-profile/user-profil
 import { UserLoginComponent } from './app/components/user/user-login/user-login.component';
 import { UserRegisterComponent } from './app/components/user/user-register/user-register.component';
 
-
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(HttpClientModule, BrowserAnimationsModule),
@@ -36,16 +35,16 @@ bootstrapApplication(AppComponent, {
       { path: 'rooms/availability', component: RoomAvailabilityComponent },
       { path: 'rooms/create', component: RoomCreateComponent },
       { path: 'rooms/edit/:id', component: RoomEditComponent },
-      { path: 'rooms/detail/', component: RoomDetailComponent },
+      { path: 'rooms/detail/:id', component: RoomDetailComponent },
       { path: 'reservations', component: ReservationListComponent },
       { path: 'reservations/create', component: ReservationCreateComponent },
       { path: 'reservations/:id', component: ReservationDetailComponent },
-      {path: 'profile', component: ProfileComponent},
-      {path: 'login', component: UserLoginComponent},
-      {path: 'register', component: UserRegisterComponent},
+      { path: 'profile', component: ProfileComponent },
+      { path: 'login', component: UserLoginComponent },
+      { path: 'register', component: UserRegisterComponent },
 
       { path: '', redirectTo: '/', pathMatch: 'full' }, // Redirigir a la página principal por defecto
-      { path: '**', redirectTo: '/' } // Redirigir cualquier ruta no encontrada a Home
+      { path: '**', redirectTo: '/' }, // Redirigir cualquier ruta no encontrada a Home
     ]),
     RoleService,
     UserService,
@@ -55,6 +54,5 @@ bootstrapApplication(AppComponent, {
     ContactService,
     ReservationHistoryService,
     provideAnimationsAsync(),
-    provideAnimationsAsync(), provideAnimationsAsync()
-  ]
-}).catch(err => console.error(err));
+  ],
+}).catch((err) => console.error(err));
