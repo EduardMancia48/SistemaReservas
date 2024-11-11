@@ -2,8 +2,10 @@ export interface Room {
   sala_id: number;
   nombre: string;
   capacidad: number;
-  ubicacion: string;
+  ubicacion_id: number;
   precio: number;
   disponible: boolean;
-  img:string;
+  actividad: string;
+  descripcion?: string;
+  img?: string;
 }

@@ -7,27 +7,33 @@ import { Room } from '../models/room';
   providedIn: 'root'
 })
 export class RoomService {
-  private apiUrl = 'https://flowery-caterwauling-echium.glitch.me/salas';
+  private apiUrl = 'https://flowery-caterwauling-echium.glitch.me';
 
   constructor(private http: HttpClient) {}
 
   getRooms(): Observable<Room[]> {
-    return this.http.get<Room[]>(this.apiUrl);
+    return this.http.get<Room[]>(`${this.apiUrl}/salas`);
   }
 
   getRoomById(id: number): Observable<Room> {
-    return this.http.get<Room>(`${this.apiUrl}/${id}`);
+    return this.http.get<Room>(`${this.apiUrl}/salas/${id}`);
   }
 
   createRoom(room: Room): Observable<Room> {
-    return this.http.post<Room>(this.apiUrl, room);
+    return this.http.post<Room>(`${this.apiUrl}/salas`, room);
   }
 
   updateRoom(id: number, room: Room): Observable<Room> {
-    return this.http.put<Room>(`${this.apiUrl}/${id}`, room);
+    return this.http.put<Room>(`${this.apiUrl}/salas/${id}`, room);
   }
 
   deleteRoom(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/salas/${id}`);
+  }
+
+  uploadImage(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<any>(`${this.apiUrl}/upload`, formData);
   }
 }

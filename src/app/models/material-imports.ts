@@ -20,6 +20,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatListModule} from '@angular/material/list';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 export const materialModules = [
   MatButtonModule,
@@ -43,5 +45,7 @@ export const materialModules = [
   FlexLayoutModule,
   MatListModule,
   ReactiveFormsModule,
-  MatPaginatorModule
+  MatOptionModule,
+  MatPaginatorModule,
+  MatSelectModule,
 ];

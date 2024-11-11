@@ -24,6 +24,7 @@ import { ReservationHistoryService } from './app/services/reservation-history.se
 import { ProfileComponent } from './app/components/user/user-profile/user-profile.component';
 import { UserLoginComponent } from './app/components/user/user-login/user-login.component';
 import { UserRegisterComponent } from './app/components/user/user-register/user-register.component';
+import { UbicacionService } from './app/services/ubicacion.service';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -49,6 +50,7 @@ bootstrapApplication(AppComponent, {
     RoleService,
     UserService,
     RoomService,
+    UbicacionService,
     ReservationService,
     ReservationStatusService,
     ContactService,
