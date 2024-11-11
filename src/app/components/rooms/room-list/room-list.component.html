@@ -27,7 +27,7 @@
       <!-- Ubicación Column -->
       <ng-container matColumnDef="ubicacion">
         <th mat-header-cell *matHeaderCellDef>Ubicación</th>
-        <td mat-cell *matCellDef="let room">{{ room.ubicacion }}</td>
+        <td mat-cell *matCellDef="let room">{{ getUbicacionDescripcion(room.ubicacion_id) }}</td>
       </ng-container>
 
       <!-- Precio Column -->

@@ -47,5 +47,5 @@ export const materialModules = [
   ReactiveFormsModule,
   MatOptionModule,
   MatPaginatorModule,
-  MatSelectModule,
+  MatSelectModule
 ];

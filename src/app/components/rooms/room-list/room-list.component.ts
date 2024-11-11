@@ -7,6 +7,8 @@ import { materialModules } from '../../../models/material-imports';
 import { RoomService } from '../../../services/room.service';
 import { Room } from '../../../models/room';
 import { RouterModule } from '@angular/router';
+import { Ubicacion } from '../../../models/ubications';
+import { UbicacionService } from '../../../services/ubicacion.service';
 
 @Component({
   selector: 'app-room-list',
@@ -18,16 +20,18 @@ import { RouterModule } from '@angular/router';
 export class RoomListComponent implements OnInit {
   displayedColumns: string[] = ['index', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones'];
   dataSource: MatTableDataSource<Room>;
+  ubicaciones: Ubicacion[] = [];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private roomService: RoomService) {
+  constructor(private roomService: RoomService, private ubicacionService: UbicacionService) {
     this.dataSource = new MatTableDataSource<Room>();
   }
 
   ngOnInit(): void {
     this.getRooms();
+    this.loadUbicaciones();
   }
 
   getRooms(): void {
@@ -36,6 +40,17 @@ export class RoomListComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
+  }
+
+  loadUbicaciones(): void {
+    this.ubicacionService.getUbicaciones().subscribe((data: Ubicacion[]) => {
+      this.ubicaciones = data;
+    });
+  }
+
+  getUbicacionDescripcion(ubicacion_id: number): string {
+    const ubicacion = this.ubicaciones.find(u => u.ubicacion_id === ubicacion_id);
+    return ubicacion ? ubicacion.descripcion : 'Desconocida';
   }
 
   applyFilter(event: Event) {

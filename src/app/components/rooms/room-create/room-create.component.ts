@@ -6,6 +6,7 @@ import { RoomService } from '../../../services/room.service';
 import { CommonModule } from '@angular/common';
 import { UbicacionService } from '../../../services/ubicacion.service';
 import { Ubicacion } from '../../../models/ubications';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-room-create',
@@ -19,12 +20,14 @@ export class RoomCreateComponent implements OnInit {
   ubicaciones: Ubicacion[] = [];
   selectedFile: File | null = null;
   imageUrl: string | null = null;
+  isSmallScreen: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private roomService: RoomService,
     private ubicacionService: UbicacionService,
-    private router: Router
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.roomForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -32,14 +35,17 @@ export class RoomCreateComponent implements OnInit {
       ubicacion_id: ['', Validators.required],
       precio: ['', [Validators.required, Validators.min(0)]],
       disponible: [false, Validators.required],
-      actividad: ['', Validators.required], // Asegúrate de que este campo esté presente
-      descripcion: [''], // Asegúrate de que este campo esté presente
+      actividad: ['', Validators.required],
+      descripcion: [''],
       img: ['']
     });
   }
 
   ngOnInit(): void {
     this.loadUbicaciones();
+    this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
+      this.isSmallScreen = result.matches;
+    });
   }
 
   loadUbicaciones(): void {
