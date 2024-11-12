@@ -3,7 +3,9 @@
     <span class="toolbar-title">Sistema de Reservas</span>
     <div fxHide fxShow.gt-xs fxLayout="row" fxLayoutGap="10px">
       <button mat-button [routerLink]="['/']"><mat-icon>home</mat-icon>Inicio</button>
-      <button mat-button [matMenuTriggerFor]="roomsMenu">Salas</button>
+      <ng-container *ngIf="isLoggedIn">
+        <button mat-button [matMenuTriggerFor]="roomsMenu">Salas</button>
+      </ng-container>
       <button mat-button [routerLink]="['/reservations']">Reservaciones</button>
       <ng-container *ngIf="isLoggedIn">
         <button mat-button [matMenuTriggerFor]="profileMenu">
@@ -24,7 +26,9 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item [routerLink]="['/']"><mat-icon>home</mat-icon>Inicio</button>
-        <button mat-menu-item [matMenuTriggerFor]="roomsMenu">Salas</button>
+        <ng-container *ngIf="isLoggedIn">
+          <button mat-menu-item [matMenuTriggerFor]="roomsMenu">Salas</button>
+        </ng-container>
         <button mat-menu-item [routerLink]="['/reservations']">Reservaciones</button>
         <ng-container *ngIf="isLoggedIn">
           <button mat-menu-item [matMenuTriggerFor]="profileMenuSm">
@@ -44,7 +48,7 @@
 </mat-toolbar>
 
 <mat-menu #roomsMenu="matMenu">
-  <ng-container *ngIf="isLoggedIn && userRole === 1">
+  <ng-container *ngIf="userRole === 1">
     <button mat-menu-item [routerLink]="['/rooms']">Lista de Salas</button>
   </ng-container>
   <button mat-menu-item [routerLink]="['/rooms/availability']">Disponibilidad</button>
