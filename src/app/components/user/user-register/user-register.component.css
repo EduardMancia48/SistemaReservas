@@ -6,6 +6,9 @@
 
 .register-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 20px;
+}
+.full-width {
+  width: 100%;
 }
