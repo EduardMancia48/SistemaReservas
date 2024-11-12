@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { materialModules } from '../../../models/material-imports';
 import { UbicacionService } from '../../../services/ubicacion.service';
 import { Ubicacion } from '../../../models/ubications';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-room-edit',
@@ -27,7 +28,8 @@ export class RoomEditComponent implements OnInit {
     private roomService: RoomService,
     private ubicacionService: UbicacionService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.roomForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -90,7 +92,7 @@ export class RoomEditComponent implements OnInit {
   updateRoom(): void {
     if (this.imageUrl) {
       this.roomService.updateRoom(this.roomId, this.roomForm.value).subscribe(() => {
-        this.router.navigate(['/rooms']);
+        this.location.back(); // Navegar de regreso a la ruta anterior
       }, error => {
         console.error('Error al actualizar la sala:', error);
       });
@@ -100,6 +102,6 @@ export class RoomEditComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/rooms']);
+    this.location.back(); // Navegar de regreso a la ruta anterior
   }
 }
