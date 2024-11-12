@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { materialModules } from '../../../models/material-imports';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomDetailDialogComponent } from '../room-detail-dialog/room-detail-dialog.component';
+import { Ubicacion } from '../../../models/ubications';
+import { UbicacionService } from '../../../services/ubicacion.service';
 
 
 @Component({
@@ -18,18 +20,30 @@ import { RoomDetailDialogComponent } from '../room-detail-dialog/room-detail-dia
   templateUrl: './room-detail.component.html',
   styleUrls: ['./room-detail.component.css']
 })
-export class RoomDetailComponent {
+export class RoomDetailComponent implements OnInit {
   displayedColumns: string[] = ['sala_id', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones', 'img'];
   dataSource: MatTableDataSource<Room> = new MatTableDataSource<Room>();
+  ubicaciones: Ubicacion[] = [];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private roomService: RoomService, private dialog: MatDialog) {}
-
+  constructor(private roomService: RoomService, private ubicacionService: UbicacionService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getRooms();
+    this.loadUbicaciones();
+  }
+
+  loadUbicaciones(): void {
+    this.ubicacionService.getUbicaciones().subscribe((data: Ubicacion[]) => {
+      this.ubicaciones = data;
+    });
+  }
+
+  getUbicacionDescripcion(ubicacion_id: number): string {
+    const ubicacion = this.ubicaciones.find(u => u.ubicacion_id === ubicacion_id);
+    return ubicacion ? ubicacion.descripcion : 'Desconocida';
   }
 
   openRoomDetail(room: Room): void {
@@ -39,8 +53,6 @@ export class RoomDetailComponent {
     });
   }
 
-  
-  
   getRooms(): void {
     this.roomService.getRooms().subscribe((data: Room[]) => {
       this.dataSource.data = data;

@@ -5,6 +5,8 @@ import { RoomService } from '../../../services/room.service';
 import { Room } from '../../../models/room';
 import { CommonModule } from '@angular/common';
 import { materialModules } from '../../../models/material-imports';
+import { UbicacionService } from '../../../services/ubicacion.service';
+import { Ubicacion } from '../../../models/ubications';
 
 @Component({
   selector: 'app-room-edit',
@@ -15,50 +17,82 @@ import { materialModules } from '../../../models/material-imports';
 })
 export class RoomEditComponent implements OnInit {
   roomForm: FormGroup;
-  roomId: number = 0;
+  ubicaciones: Ubicacion[] = [];
+  selectedFile: File | null = null;
+  imageUrl: string | null = null;
+  roomId: number;
 
   constructor(
     private fb: FormBuilder,
     private roomService: RoomService,
-    private router: Router,
-    private route: ActivatedRoute
+    private ubicacionService: UbicacionService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.roomForm = this.fb.group({
       nombre: ['', Validators.required],
       capacidad: ['', [Validators.required, Validators.min(1)]],
-      ubicacion: ['', Validators.required],
+      ubicacion_id: ['', Validators.required],
       precio: ['', [Validators.required, Validators.min(0)]],
-      disponible: [false, Validators.required]
+      disponible: [false, Validators.required],
+      actividad: ['', Validators.required],
+      descripcion: [''],
+      img: ['']
     });
+
+    this.roomId = this.route.snapshot.params['id'];
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.roomId = +params.get('id')!;
-      if (this.roomId) {
-        this.loadRoom();
-      } else {
-        console.error('No se pudo obtener el ID de la sala');
-      }
+    this.loadUbicaciones();
+    this.loadRoom();
+  }
+
+  loadUbicaciones(): void {
+    this.ubicacionService.getUbicaciones().subscribe((data: Ubicacion[]) => {
+      this.ubicaciones = data;
     });
   }
 
   loadRoom(): void {
     this.roomService.getRoomById(this.roomId).subscribe((room: Room) => {
       this.roomForm.patchValue(room);
-    }, error => {
-      console.error('Error al obtener los datos de la sala:', error);
+      this.imageUrl = room.img ?? null; // Asegurarse de que imageUrl sea string o null
     });
+  }
+
+  onFileSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.selectedFile = file;
+    }
   }
 
   onSubmit(): void {
     if (this.roomForm.valid) {
-      this.roomService.updateRoom(this.roomId, this.roomForm.value).subscribe(() => {
-        this.router.navigate(['/rooms']);
-      }, error => {
-        console.error('Error al actualizar la sala:', error);
-      });
+      if (this.selectedFile) {
+        // Subir la imagen a Cloudinary y obtener la URL
+        this.roomService.uploadImage(this.selectedFile).subscribe((response: any) => {
+          this.roomForm.patchValue({ img: response.url });
+          this.imageUrl = response.url;
+          this.updateRoom();
+        }, error => {
+          console.error('Error al subir la imagen:', error);
+        });
+      } else {
+        // Mantener la URL de la imagen existente si no se selecciona una nueva imagen
+        this.roomForm.patchValue({ img: this.imageUrl });
+        this.updateRoom();
+      }
     }
+  }
+
+  updateRoom(): void {
+    this.roomService.updateRoom(this.roomId, this.roomForm.value).subscribe(() => {
+      this.router.navigate(['/rooms']);
+    }, error => {
+      console.error('Error al actualizar la sala:', error);
+    });
   }
 
   onCancel(): void {

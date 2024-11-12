@@ -7,5 +7,5 @@ export interface Room {
   disponible: boolean;
   actividad: string;
   descripcion?: string;
-  img?: string;
+  img: string;
 }

@@ -36,7 +36,7 @@ bootstrapApplication(AppComponent, {
       { path: 'rooms/availability', component: RoomAvailabilityComponent },
       { path: 'rooms/create', component: RoomCreateComponent },
       { path: 'rooms/edit/:id', component: RoomEditComponent },
-      { path: 'rooms/detail/:id', component: RoomDetailComponent },
+      { path: 'rooms/detail', component: RoomDetailComponent },
       { path: 'reservations', component: ReservationListComponent },
       { path: 'reservations/create', component: ReservationCreateComponent },
       { path: 'reservations/:id', component: ReservationDetailComponent },

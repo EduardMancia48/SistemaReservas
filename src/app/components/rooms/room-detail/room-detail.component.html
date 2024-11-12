@@ -3,13 +3,15 @@
 	  <mat-card-header>
 		<div mat-card-avatar class="example-header-image"></div>
 		<mat-card-title>{{ room.nombre }}</mat-card-title>
-		<mat-card-subtitle>{{ room.ubicacion_id }}</mat-card-subtitle>
+		<mat-card-subtitle>{{ getUbicacionDescripcion(room.ubicacion_id) }}</mat-card-subtitle>
 	  </mat-card-header>
   
-	  <img mat-card-image src="{{ room.img }}" alt="Imagen de la sala" />
+	  <img mat-card-image [src]="room.img" alt="Imagen de la sala" *ngIf="room.img" />
 	  <mat-card-content>
 		<p><strong>Capacidad:</strong> {{ room.capacidad }} Personas</p>
 		<p><strong>Precio:</strong> {{ room.precio | currency }}</p>
+		<p><strong>Actividad:</strong> {{ room.actividad }}</p>
+		<p><strong>Descripción:</strong> {{ room.descripcion }}</p>
 		<p><strong>Disponible:</strong> {{ room.disponible ? 'Sí' : 'No' }}</p>
 	  </mat-card-content>
   
@@ -23,4 +25,3 @@
 	  </mat-card-actions>
 	</mat-card>
   </div>
-  
