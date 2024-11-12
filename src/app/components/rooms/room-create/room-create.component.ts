@@ -73,17 +73,21 @@ export class RoomCreateComponent implements OnInit {
           console.error('Error al subir la imagen:', error);
         });
       } else {
-        this.createRoom();
+        console.error('Debe seleccionar una imagen antes de crear la sala.');
       }
     }
   }
 
   createRoom(): void {
-    this.roomService.createRoom(this.roomForm.value).subscribe(() => {
-      this.router.navigate(['/rooms']);
-    }, error => {
-      console.error('Error al crear la sala:', error);
-    });
+    if (this.imageUrl) {
+      this.roomService.createRoom(this.roomForm.value).subscribe(() => {
+        this.router.navigate(['/rooms']);
+      }, error => {
+        console.error('Error al crear la sala:', error);
+      });
+    } else {
+      console.error('No se puede crear la sala sin una URL de imagen.');
+    }
   }
 
   onCancel(): void {

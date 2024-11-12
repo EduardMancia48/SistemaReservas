@@ -88,11 +88,15 @@ export class RoomEditComponent implements OnInit {
   }
 
   updateRoom(): void {
-    this.roomService.updateRoom(this.roomId, this.roomForm.value).subscribe(() => {
-      this.router.navigate(['/rooms']);
-    }, error => {
-      console.error('Error al actualizar la sala:', error);
-    });
+    if (this.imageUrl) {
+      this.roomService.updateRoom(this.roomId, this.roomForm.value).subscribe(() => {
+        this.router.navigate(['/rooms']);
+      }, error => {
+        console.error('Error al actualizar la sala:', error);
+      });
+    } else {
+      console.error('No se puede actualizar la sala sin una URL de imagen.');
+    }
   }
 
   onCancel(): void {
