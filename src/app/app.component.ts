@@ -10,7 +10,7 @@ import { NavbarComponent } from '../app/shared/navbar/navbar.component';
   template: `
     <app-navbar></app-navbar>
     <router-outlet></router-outlet> <!-- Aquí se cargarán las vistas según las rutas -->
-    <app-footer></app-footer>
+    
   `
 })
 export class AppComponent {
