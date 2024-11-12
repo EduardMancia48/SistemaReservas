@@ -52,7 +52,9 @@ export class RoomListComponent implements OnInit {
     const ubicacion = this.ubicaciones.find(u => u.ubicacion_id === ubicacion_id);
     return ubicacion ? ubicacion.descripcion : 'Desconocida';
   }
-
+  getIndex(index: number): number {
+    return index + 1 + (this.paginator.pageIndex * this.paginator.pageSize);
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
