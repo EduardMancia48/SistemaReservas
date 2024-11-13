@@ -11,8 +11,15 @@ export class AuthService {
   constructor() {
     const token = localStorage.getItem('authToken');
     const role = localStorage.getItem('userRole');
-    this.isLoggedInSubject = new BehaviorSubject<boolean>(!!token);
+    const sessionStart = localStorage.getItem('sessionStart');
+    const isSessionValid = sessionStart ? this.isSessionValid(parseInt(sessionStart, 10)) : false;
+
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(!!token && isSessionValid);
     this.userRoleSubject = new BehaviorSubject<number | null>(role ? parseInt(role, 10) : null);
+
+    if (!isSessionValid) {
+      this.logout();
+    }
   }
 
   isAuthenticated(): Observable<boolean> {
@@ -24,9 +31,12 @@ export class AuthService {
   }
 
   login(token: string, userId: number, role: number): void {
+    const sessionStart = Date.now();
     localStorage.setItem('authToken', token);
     localStorage.setItem('userId', userId.toString());
     localStorage.setItem('userRole', role.toString());
+    localStorage.setItem('sessionStart', sessionStart.toString());
+
     this.isLoggedInSubject.next(true);
     this.userRoleSubject.next(role);
   }
@@ -35,8 +45,16 @@ export class AuthService {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userId');
     localStorage.removeItem('userRole');
+    localStorage.removeItem('sessionStart');
+
     this.isLoggedInSubject.next(false);
     this.userRoleSubject.next(null);
+  }
+
+  private isSessionValid(sessionStart: number): boolean {
+    const now = Date.now();
+    const twentyFourHours = 24 * 60 * 60 * 1000;
+    return (now - sessionStart) < twentyFourHours;
   }
 
   getUserId(): number | null {
