@@ -1,6 +1,6 @@
 <h2>Disponibilidad de Salas</h2>
 <div class="room-list">
-  <mat-card class="room-card" *ngFor="let room of rooms">
+  <mat-card class="room-card" *ngFor="let room of rooms" [ngClass]="{'disponible': room.disponible, 'ocupada': !room.disponible}">
     <mat-card-header>
       <mat-card-title>{{ room.nombre }}</mat-card-title>
       <mat-card-subtitle>Capacidad: {{ room.capacidad }} personas</mat-card-subtitle>

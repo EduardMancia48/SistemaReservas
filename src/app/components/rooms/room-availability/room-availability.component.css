@@ -36,3 +36,14 @@ mat-card-title, mat-card-subtitle {
     flex: 1 1 100%; /* Ajusta el ancho de las tarjetas para pantallas pequeñas */
   }
 }
+
+/* Clases para el estado de disponibilidad */
+.disponible {
+  background-color: #d4edda; /* Verde claro */
+  border-left: 5px solid #28a745; /* Verde oscuro */
+}
+
+.ocupada {
+  background-color: #f8d7da; /* Rojo claro */
+  border-left: 5px solid #dc3545; /* Rojo oscuro */
+}
