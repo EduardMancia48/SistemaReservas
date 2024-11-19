@@ -8,11 +8,10 @@ import { User } from '../../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-user-register',
-  standalone: true,
-  imports: [materialModules, CommonModule],
-  templateUrl: './user-register.component.html',
-  styleUrl: './user-register.component.css'
+    selector: 'app-user-register',
+    imports: [materialModules, CommonModule],
+    templateUrl: './user-register.component.html',
+    styleUrl: './user-register.component.css'
 })
 export class UserRegisterComponent implements OnInit {
   registerForm: FormGroup;

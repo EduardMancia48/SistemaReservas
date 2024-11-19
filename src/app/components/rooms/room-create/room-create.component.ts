@@ -9,11 +9,10 @@ import { Ubicacion } from '../../../models/ubications';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'app-room-create',
-  standalone: true,
-  imports: [...materialModules, CommonModule],
-  templateUrl: './room-create.component.html',
-  styleUrl: './room-create.component.css'
+    selector: 'app-room-create',
+    imports: [...materialModules, CommonModule],
+    templateUrl: './room-create.component.html',
+    styleUrl: './room-create.component.css'
 })
 export class RoomCreateComponent implements OnInit {
   roomForm: FormGroup;

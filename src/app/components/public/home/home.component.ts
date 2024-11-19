@@ -13,12 +13,11 @@ import { ReservationCreateComponent } from '../../reservation/reservation-create
 register();
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  standalone: true,
-  imports: [CommonModule, MatDialogModule, ...materialModules],
-  styleUrls: ['./home.component.css'],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    imports: [CommonModule, MatDialogModule, ...materialModules],
+    styleUrls: ['./home.component.css'],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeComponent implements OnInit {
   rooms: Room[] = [];

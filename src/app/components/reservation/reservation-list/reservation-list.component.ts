@@ -6,11 +6,10 @@ import { RouterModule } from '@angular/router';
 import { materialModules } from '../../../models/material-imports';
 
 @Component({
-  selector: 'app-reservation-list',
-  standalone: true,
-  imports: [CommonModule, RouterModule, ...materialModules],
-  templateUrl: './reservation-list.component.html',
-  styleUrls: ['./reservation-list.component.css']
+    selector: 'app-reservation-list',
+    imports: [CommonModule, RouterModule, ...materialModules],
+    templateUrl: './reservation-list.component.html',
+    styleUrls: ['./reservation-list.component.css']
 })
 export class ReservationListComponent implements OnInit {
   reservations: Reservation[] = [];

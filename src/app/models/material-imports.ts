@@ -49,4 +49,5 @@ export const materialModules = [
   MatOptionModule,
   MatPaginatorModule,
   MatSelectModule,
+  MatTimepickerModule,
 ];

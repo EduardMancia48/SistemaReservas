@@ -7,10 +7,9 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, CommonModule, NavbarComponent, FooterComponent],
-  template: `
+    selector: 'app-root',
+    imports: [RouterOutlet, CommonModule, NavbarComponent, FooterComponent],
+    template: `
     <app-navbar></app-navbar>
     <router-outlet></router-outlet> <!-- Aquí se cargarán las vistas según las rutas -->
     <app-footer *ngIf="showFooter"></app-footer>

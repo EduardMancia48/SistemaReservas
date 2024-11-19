@@ -7,11 +7,10 @@ import { AuthService } from '../../../interceptors/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-user-profile',
-  standalone: true,
-  imports: [materialModules, CommonModule],
-  templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.css'
+    selector: 'app-user-profile',
+    imports: [materialModules, CommonModule],
+    templateUrl: './user-profile.component.html',
+    styleUrl: './user-profile.component.css'
 })
 export class ProfileComponent implements OnInit {
   user: User | null = null;

@@ -10,11 +10,10 @@ import { Ubicacion } from '../../../models/ubications';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-room-edit',
-  standalone: true,
-  imports: [CommonModule, ...materialModules],
-  templateUrl: './room-edit.component.html',
-  styleUrls: ['./room-edit.component.css']
+    selector: 'app-room-edit',
+    imports: [CommonModule, ...materialModules],
+    templateUrl: './room-edit.component.html',
+    styleUrls: ['./room-edit.component.css']
 })
 export class RoomEditComponent implements OnInit {
   roomForm: FormGroup;

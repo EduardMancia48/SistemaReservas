@@ -7,14 +7,13 @@ import { materialModules } from '../../../models/material-imports';
 import { Reservation } from '../../../models/reservation';
 
 @Component({
-  standalone: true,
-  imports: [ CommonModule, FormsModule, ReactiveFormsModule, MatNativeDateModule, ...materialModules ],
-  providers: [
-    provideNativeDateAdapter()
-  ],
-  selector: 'app-reservation-create',
-  templateUrl: './reservation-create.component.html',
-  styleUrls: ['./reservation-create.component.css']
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, MatNativeDateModule, ...materialModules],
+    providers: [
+        provideNativeDateAdapter()
+    ],
+    selector: 'app-reservation-create',
+    templateUrl: './reservation-create.component.html',
+    styleUrls: ['./reservation-create.component.css']
 })
 export class ReservationCreateComponent {
   reservationForm: FormGroup;

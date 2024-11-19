@@ -11,11 +11,10 @@ import { Ubicacion } from '../../../models/ubications';
 import { UbicacionService } from '../../../services/ubicacion.service';
 
 @Component({
-  selector: 'app-room-list',
-  standalone: true,
-  imports: [CommonModule, ...materialModules, RouterModule],
-  templateUrl: './room-list.component.html',
-  styleUrls: ['./room-list.component.css']
+    selector: 'app-room-list',
+    imports: [CommonModule, ...materialModules, RouterModule],
+    templateUrl: './room-list.component.html',
+    styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
   displayedColumns: string[] = ['index', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones'];

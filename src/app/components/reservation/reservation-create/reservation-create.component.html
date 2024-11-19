@@ -19,12 +19,16 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Hora de Inicio</mat-label>
-          <input matInput type="time" formControlName="hora_inicio" required>
+          <input matInput [matTimepicker]="timepicker1" formControlName="hora_inicio" [min]="minTime" required readonly (timeChange)="onHoraInicioChange()">
+          <mat-timepicker-toggle matSuffix [for]="timepicker1"></mat-timepicker-toggle>
+          <mat-timepicker #timepicker1></mat-timepicker>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Hora de Fin</mat-label>
-          <input matInput type="time" formControlName="hora_fin" required>
+          <input matInput [matTimepicker]="timepicker2" formControlName="hora_fin" required readonly>
+          <mat-timepicker-toggle matSuffix [for]="timepicker2"></mat-timepicker-toggle>
+          <mat-timepicker #timepicker2></mat-timepicker>
         </mat-form-field>
 
         <mat-dialog-actions>

@@ -14,11 +14,10 @@ import { UbicacionService } from '../../../services/ubicacion.service';
 
 
 @Component({
-  selector: 'app-room-detail',
-  standalone: true,
-  imports: [CommonModule, ...materialModules, RouterModule],
-  templateUrl: './room-detail.component.html',
-  styleUrls: ['./room-detail.component.css']
+    selector: 'app-room-detail',
+    imports: [CommonModule, ...materialModules, RouterModule],
+    templateUrl: './room-detail.component.html',
+    styleUrls: ['./room-detail.component.css']
 })
 export class RoomDetailComponent implements OnInit {
   displayedColumns: string[] = ['sala_id', 'nombre', 'capacidad', 'ubicacion', 'precio', 'disponible', 'acciones', 'img'];

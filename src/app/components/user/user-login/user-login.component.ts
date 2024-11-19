@@ -8,11 +8,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../interceptors/auth.service';
 @Component({
-  selector: 'app-user-login',
-  standalone: true,
-  imports: [materialModules, CommonModule, RouterModule],
-  templateUrl: './user-login.component.html',
-  styleUrl: './user-login.component.css'
+    selector: 'app-user-login',
+    imports: [materialModules, CommonModule, RouterModule],
+    templateUrl: './user-login.component.html',
+    styleUrl: './user-login.component.css'
 })
 export class UserLoginComponent implements OnInit {
   loginForm: FormGroup;
