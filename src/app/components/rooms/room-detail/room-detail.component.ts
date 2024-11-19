@@ -14,6 +14,7 @@ import { UbicacionService } from '../../../services/ubicacion.service';
 
 
 @Component({
+  standalone: true,
     selector: 'app-room-detail',
     imports: [CommonModule, ...materialModules, RouterModule],
     templateUrl: './room-detail.component.html',

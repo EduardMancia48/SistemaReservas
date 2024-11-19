@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../interceptors/auth.service';
 
 @Component({
+  standalone: true,
     selector: 'app-navbar',
     imports: [CommonModule, ...materialModules, RouterModule],
     templateUrl: './navbar.component.html',

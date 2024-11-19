@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../interceptors/auth.service';
 @Component({
+  standalone: true,
     selector: 'app-user-login',
     imports: [materialModules, CommonModule, RouterModule],
     templateUrl: './user-login.component.html',

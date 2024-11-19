@@ -7,6 +7,7 @@ import { AuthService } from '../../../interceptors/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
     selector: 'app-user-profile',
     imports: [materialModules, CommonModule],
     templateUrl: './user-profile.component.html',

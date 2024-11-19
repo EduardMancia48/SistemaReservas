@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Room } from '../../../models/room';
 
 @Component({
+  standalone: true,
     selector: 'app-room-availability',
     templateUrl: './room-availability.component.html',
     styleUrls: ['./room-availability.component.css'],

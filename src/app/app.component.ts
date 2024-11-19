@@ -7,6 +7,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
+  standalone: true,
     selector: 'app-root',
     imports: [RouterOutlet, CommonModule, NavbarComponent, FooterComponent],
     template: `

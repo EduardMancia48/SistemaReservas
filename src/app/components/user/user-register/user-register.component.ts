@@ -8,6 +8,7 @@ import { User } from '../../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
+  standalone: true,
     selector: 'app-user-register',
     imports: [materialModules, CommonModule],
     templateUrl: './user-register.component.html',

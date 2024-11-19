@@ -9,6 +9,7 @@ import { Ubicacion } from '../../../models/ubications';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
+  standalone: true,
     selector: 'app-room-create',
     imports: [...materialModules, CommonModule],
     templateUrl: './room-create.component.html',

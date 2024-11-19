@@ -13,6 +13,7 @@ import { ReservationCreateComponent } from '../../reservation/reservation-create
 register();
 
 @Component({
+  standalone: true,
     selector: 'app-home',
     templateUrl: './home.component.html',
     imports: [CommonModule, MatDialogModule, ...materialModules],

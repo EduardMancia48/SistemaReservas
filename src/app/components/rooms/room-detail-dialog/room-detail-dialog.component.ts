@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Ubicacion } from '../../../models/ubications';
 import { UbicacionService } from '../../../services/ubicacion.service';
 @Component({
+  standalone: true,
     selector: 'app-room-detail-dialog',
     imports: [CommonModule, ...materialModules, RouterModule],
     templateUrl: './room-detail-dialog.component.html',

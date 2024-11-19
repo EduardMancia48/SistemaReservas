@@ -10,6 +10,7 @@ import { Ubicacion } from '../../../models/ubications';
 import { Location } from '@angular/common';
 
 @Component({
+  standalone: true,
     selector: 'app-room-edit',
     imports: [CommonModule, ...materialModules],
     templateUrl: './room-edit.component.html',
