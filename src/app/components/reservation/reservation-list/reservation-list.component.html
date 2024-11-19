@@ -1,7 +1,7 @@
 <h2>Mis Reservas</h2>
 <ul>
   <li *ngFor="let reservation of reservations">
-    Sala {{ reservation.sala_id }} reservada desde {{ reservation.fecha_inicio | date }} hasta {{ reservation.fecha_fin | date }}
+    Sala {{ reservation.sala_id }} reservada desde {{ reservation.fecha_reserva | date }} hasta {{ reservation.hora_inicio }} - {{ reservation.hora_fin }}
   </li>
 </ul>
 

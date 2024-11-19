@@ -29,7 +29,7 @@
         <ng-container *ngIf="isLoggedIn">
           <button mat-menu-item [matMenuTriggerFor]="roomsMenu">Salas</button>
         </ng-container>
-        <button mat-menu-item [routerLink]="['/reservations']">Reservaciones</button>
+        <button mat-menu-item [routerLink]="['/reservations/create']">Reservaciones</button>
         <ng-container *ngIf="isLoggedIn">
           <button mat-menu-item [matMenuTriggerFor]="profileMenuSm">
             <mat-icon class="profile-icon">account_circle</mat-icon> Perfil

@@ -1,14 +1,37 @@
-<h2>Reservar Sala</h2>
-<!-- Formulario de Reserva
-<form (ngSubmit)="onSubmit()">
-  <label for="roomId">ID del Salón</label>
-  <input type="number" id="roomId" [(ngModel)]="reservation.roomId" name="roomId" required>
+<h2 mat-dialog-title>Reservar Sala</h2>
+<mat-dialog-content>
+  <div class="modal-container">
+    <div class="room-info">
+      <h3>{{ data.room.nombre }}</h3>
+      <p><strong>Capacidad:</strong> {{ data.room.capacidad }} personas</p>
+      <p><strong>Actividades:</strong> {{ data.room.actividad }}</p>
+      <p><strong>Descripción:</strong> {{ data.room.descripcion }}</p>
+      <p><strong>Precio:</strong> ${{ data.room.precio }}/hora</p>
+    </div>
+    <div class="reservation-form">
+      <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de Reserva</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="fecha_reserva" [min]="minDate" required readonly>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
 
-  <label for="startTime">Hora de Inicio</label>
-  <input type="datetime-local" id="startTime" [(ngModel)]="reservation.startTime" name="startTime" required>
+        <mat-form-field appearance="fill">
+          <mat-label>Hora de Inicio</mat-label>
+          <input matInput type="time" formControlName="hora_inicio" required>
+        </mat-form-field>
 
-  <label for="endTime">Hora de Fin</label>
-  <input type="datetime-local" id="endTime" [(ngModel)]="reservation.endTime" name="endTime" required>
+        <mat-form-field appearance="fill">
+          <mat-label>Hora de Fin</mat-label>
+          <input matInput type="time" formControlName="hora_fin" required>
+        </mat-form-field>
 
-  <button type="submit">Reservar</button>
-</form>-->
+        <mat-dialog-actions>
+          <button mat-button (click)="onNoClick()">Cancelar</button>
+          <button mat-button type="submit" [disabled]="!reservationForm.valid">Reservar</button>
+        </mat-dialog-actions>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>

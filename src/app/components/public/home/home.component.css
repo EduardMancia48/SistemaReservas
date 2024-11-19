@@ -19,6 +19,7 @@
   width: 100%;
   box-sizing: border-box;
   overflow: hidden; /* Ocultar el desbordamiento del contenido */
+  cursor: pointer;
 }
 
 .image-container {

@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import {MatTimepickerModule} from '@angular/material/timepicker';
 
 export const materialModules = [
   MatButtonModule,

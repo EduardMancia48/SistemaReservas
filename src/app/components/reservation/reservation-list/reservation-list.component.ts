@@ -8,7 +8,7 @@ import { materialModules } from '../../../models/material-imports';
 @Component({
   selector: 'app-reservation-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, materialModules],
+  imports: [CommonModule, RouterModule, ...materialModules],
   templateUrl: './reservation-list.component.html',
   styleUrls: ['./reservation-list.component.css']
 })

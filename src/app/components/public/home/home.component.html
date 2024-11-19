@@ -4,7 +4,7 @@
       <swiper-container [loop]="loop" navigation="true" [breakpoints]="breakpoints">
         <ng-container *ngFor="let room of availableRooms">
           <swiper-slide>
-            <mat-card class="room-card">
+            <mat-card class="room-card" (click)="openReservationDialog(room)">
               <div class="image-container">
                 <img mat-card-image [src]="room.img" alt="{{ room.nombre }}">
               </div>
