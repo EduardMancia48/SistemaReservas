@@ -15,3 +15,21 @@
     font-size: 0.8rem;
   }
 }
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.navbar-buttons-mobile {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}

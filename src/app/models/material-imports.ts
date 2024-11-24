@@ -16,7 +16,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatListModule} from '@angular/material/list';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -43,7 +42,6 @@ export const materialModules = [
   MatTableModule,
   MatTooltipModule,
   MatTreeModule,
-  FlexLayoutModule,
   MatListModule,
   ReactiveFormsModule,
   MatOptionModule,

@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+  <div class="navbar-container">
     <span class="toolbar-title">Sistema de Reservas</span>
-    <div fxHide fxShow.gt-xs fxLayout="row" fxLayoutGap="10px">
+    <div class="navbar-buttons" *ngIf="isDesktop">
       <button mat-button [routerLink]="['/']"><mat-icon>home</mat-icon>Inicio</button>
       <ng-container *ngIf="isLoggedIn">
         <button mat-button [matMenuTriggerFor]="roomsMenu">Salas</button>
@@ -20,7 +20,7 @@
         <button mat-button [routerLink]="['/login']">Iniciar Sesión</button>
       </ng-container>
     </div>
-    <div fxHide fxShow.lt-sm>
+    <div class="navbar-buttons-mobile" *ngIf="!isDesktop">
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
       </button>
@@ -29,7 +29,7 @@
         <ng-container *ngIf="isLoggedIn">
           <button mat-menu-item [matMenuTriggerFor]="roomsMenu">Salas</button>
         </ng-container>
-        <button mat-menu-item [routerLink]="['/reservations/create']">Reservaciones</button>
+        <button mat-menu-item [routerLink]="['/reservations']">Reservaciones</button>
         <ng-container *ngIf="isLoggedIn">
           <button mat-menu-item [matMenuTriggerFor]="profileMenuSm">
             <mat-icon class="profile-icon">account_circle</mat-icon> Perfil
@@ -44,7 +44,7 @@
         </ng-container>
       </mat-menu>
     </div>
-  </mat-toolbar-row>
+  </div>
 </mat-toolbar>
 
 <mat-menu #roomsMenu="matMenu">
