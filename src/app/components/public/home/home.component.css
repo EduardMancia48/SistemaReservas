@@ -3,7 +3,10 @@
   overflow: hidden;
   padding: 20px;
 }
-
+.rooms-info h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
 .swiper {
   width: 100%;
   height: auto;
@@ -49,4 +52,33 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Estilos para la sección de detalles de las salas */
+.rooms-details {
+  padding: 20px;
+}
+
+.rooms-details h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.rooms-details .table-container {
+  overflow-x: auto; /* Hacer que la tabla sea deslizable horizontalmente */
+}
+
+.rooms-details table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rooms-details th, .rooms-details td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.rooms-details th {
+  background-color: #f2f2f2;
 }

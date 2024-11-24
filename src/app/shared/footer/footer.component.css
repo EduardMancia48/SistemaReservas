@@ -9,6 +9,7 @@
   text-align: center;
   margin-bottom: 10px;
   word-wrap: break-word;
+  font-size: 3vw; /* Ajustar el tamaño de la fuente según el ancho de la pantalla */
 }
 
 .social-media {
@@ -17,13 +18,32 @@
   gap: 10px;
 }
 
+.social-media a {
+  font-size: 4vw; /* Ajustar el tamaño de los iconos según el ancho de la pantalla */
+}
+
 @media (min-width: 600px) {
   .contact-info {
     text-align: left;
     margin-bottom: 0;
+    font-size: 1.5vw; /* Ajustar el tamaño de la fuente para pantallas más grandes */
   }
 
   .social-media {
     justify-content: flex-end;
+  }
+
+  .social-media a {
+    font-size: 2vw; /* Ajustar el tamaño de los iconos para pantallas más grandes */
+  }
+}
+
+@media (min-width: 960px) {
+  .contact-info {
+    font-size: 1.2vw; /* Ajustar el tamaño de la fuente para pantallas aún más grandes */
+  }
+
+  .social-media a {
+    font-size: 1.5vw; /* Ajustar el tamaño de los iconos para pantallas aún más grandes */
   }
 }

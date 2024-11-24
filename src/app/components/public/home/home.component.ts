@@ -1,4 +1,4 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RoomService } from '../../../services/room.service';
@@ -9,6 +9,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { ReservationCreateComponent } from '../../reservation/reservation-create/reservation-create.component';
+import { AuthService } from '../../../interceptors/auth.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UbicacionService } from '../../../services/ubicacion.service';
+import { Ubicacion } from '../../../models/ubications';
 
 register();
 
@@ -20,9 +25,10 @@ register();
     styleUrls: ['./home.component.css'],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   rooms: Room[] = [];
   availableRooms: Room[] = [];
+  ubicaciones: Ubicacion[] = [];
   loop: boolean = true;
   breakpoints = {
     0: {
@@ -34,8 +40,16 @@ export class HomeComponent implements OnInit {
       spaceBetween: 10
     }
   };
+  displayedColumns: string[] = ['nombre', 'precio', 'actividad', 'ubicacion'];
+  private authSubscription: Subscription = new Subscription();
 
-  constructor(private roomService: RoomService, public dialog: MatDialog) {}
+  constructor(
+    private roomService: RoomService,
+    private ubicacionService: UbicacionService,
+    private authService: AuthService,
+    public dialog: MatDialog,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.roomService.getRooms().subscribe({
@@ -48,12 +62,38 @@ export class HomeComponent implements OnInit {
         console.error('Error fetching rooms:', err);
       }
     });
+
+    this.ubicacionService.getUbicaciones().subscribe({
+      next: (ubicaciones: Ubicacion[]) => {
+        this.ubicaciones = ubicaciones;
+      },
+      error: (err) => {
+        console.error('Error fetching ubicaciones:', err);
+      }
+    });
+  }
+
+  getUbicacionDescripcion(ubicacionId: number): string {
+    const ubicacion = this.ubicaciones.find(u => u.ubicacion_id === ubicacionId);
+    return ubicacion ? ubicacion.descripcion : 'Desconocida';
   }
 
   openReservationDialog(room: Room): void {
-    this.dialog.open(ReservationCreateComponent, {
-      width: 'auto',
-      data: { room }
+    this.authSubscription = this.authService.isAuthenticated().subscribe(isAuthenticated => {
+      if (isAuthenticated) {
+        this.dialog.open(ReservationCreateComponent, {
+          width: 'auto',
+          data: { room }
+        });
+      } else {
+        this.router.navigate(['/login']);
+      }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 }
