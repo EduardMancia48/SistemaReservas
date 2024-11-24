@@ -12,23 +12,23 @@
       <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Fecha de Reserva</mat-label>
-          <input matInput [matDatepicker]="picker1" formControlName="fecha_reserva" [min]="minDate" required readonly>
+          <input matInput [matDatepicker]="picker1" formControlName="fecha_reserva" [min]="minDate" required readonly (dateChange)="onFechaReservaChange()">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Hora de Inicio</mat-label>
-          <input matInput [matTimepicker]="timepicker1" formControlName="hora_inicio" [min]="minTime" required readonly (timeChange)="onHoraInicioChange()">
-          <mat-timepicker-toggle matSuffix [for]="timepicker1"></mat-timepicker-toggle>
-          <mat-timepicker #timepicker1></mat-timepicker>
+          <mat-select formControlName="hora_inicio" required (selectionChange)="onHoraInicioChange()">
+            <mat-option *ngFor="let time of availableTimes" [value]="time">{{ time }}</mat-option>
+          </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Hora de Fin</mat-label>
-          <input matInput [matTimepicker]="timepicker2" formControlName="hora_fin" required readonly>
-          <mat-timepicker-toggle matSuffix [for]="timepicker2"></mat-timepicker-toggle>
-          <mat-timepicker #timepicker2></mat-timepicker>
+          <mat-select formControlName="hora_fin" required>
+            <mat-option *ngFor="let time of availableEndTimes" [value]="time">{{ time }}</mat-option>
+          </mat-select>
         </mat-form-field>
 
         <mat-dialog-actions>

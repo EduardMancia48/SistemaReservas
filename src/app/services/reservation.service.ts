@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reservation } from '../models/reservation';
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class ReservationService {
     return this.http.get<Reservation>(`${this.apiUrl}/${id}`);
   }
 
-  createReservation(reservation: Reservation): Observable<Reservation> {
-    return this.http.post<Reservation>(this.apiUrl, reservation);
+  createReservation(reservation: Reservation): Observable<any> {
+    return this.http.post<any>(this.apiUrl, reservation);
   }
 
   updateReservation(id: number, reservation: Reservation): Observable<Reservation> {
@@ -29,5 +30,20 @@ export class ReservationService {
 
   deleteReservation(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  scheduleReservationStatusUpdate(reservation: Reservation): void {
+    const endTime = moment.tz(`${reservation.fecha_reserva} ${reservation.hora_fin}`, 'YYYY-MM-DD HH:mm:ss', 'America/El_Salvador');
+    const now = moment.tz('America/El_Salvador');
+    const delay = endTime.diff(now);
+
+    if (delay > 0) {
+      setTimeout(() => {
+        reservation.estado_reserva_id = 2; // Estado 2 = Terminada
+        this.updateReservation(reservation.reserva_id, reservation).subscribe(() => {
+          console.log('Estado de la reserva actualizado a Terminada:', reservation);
+        });
+      }, delay);
+    }
   }
 }
