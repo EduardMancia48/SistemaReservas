@@ -8,6 +8,7 @@ import { materialModules } from '../../../models/material-imports';
 import moment from 'moment-timezone';
 import { ReservationService } from '../../../services/reservation.service';
 import { ReservationHistoryService } from '../../../services/reservation-history.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-reservation-create',
@@ -29,6 +30,7 @@ export class ReservationCreateComponent implements OnInit {
   data = inject(MAT_DIALOG_DATA);
   fb = inject(FormBuilder);
   reservationService = inject(ReservationService);
+  notificationService = inject(NotificationService);
 
   constructor() {
     this.minDate = new Date(); // Establecer la fecha mínima en la fecha actual
@@ -102,6 +104,11 @@ export class ReservationCreateComponent implements OnInit {
       this.reservationService.createReservation(reservation).subscribe(
         (response) => {
           console.log('Reserva y historial creados:', response); // Verificar que el ID de la reserva se obtenga correctamente
+          this.notificationService.addNotification({
+            message: `Haz reservado la sala "${this.data.room.nombre}" con éxito.`,
+            reservationId: response.reservaId,
+            read: false
+          });
           this.reservationService.scheduleReservationStatusUpdate(response);
           this.dialogRef.close(response);
         },

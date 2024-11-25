@@ -10,9 +10,17 @@
       <ng-container *ngIf="isLoggedIn">
         <button mat-button [matMenuTriggerFor]="profileMenu">
           <mat-icon class="profile-icon">account_circle</mat-icon> Perfil
+          <span *ngIf="unreadCount > 0" class="notification-dot"></span>
         </button>
         <mat-menu #profileMenu="matMenu">
           <button mat-menu-item [routerLink]="['/profile']">Ver Perfil</button>
+          <button mat-menu-item [matMenuTriggerFor]="notificationsMenu">
+            <mat-icon>notifications</mat-icon> Notificaciones
+            <span *ngIf="unreadCount > 0" class="notification-badge">{{ unreadCount }}</span>
+          </button>
+          <mat-menu #notificationsMenu="matMenu">
+            <app-notifications></app-notifications>
+          </mat-menu>
           <button mat-menu-item (click)="logout()">Cerrar Sesión</button>
         </mat-menu>
       </ng-container>
@@ -33,9 +41,17 @@
         <ng-container *ngIf="isLoggedIn">
           <button mat-menu-item [matMenuTriggerFor]="profileMenuSm">
             <mat-icon class="profile-icon">account_circle</mat-icon> Perfil
+            <span *ngIf="unreadCount > 0" class="notification-dot"></span>
           </button>
           <mat-menu #profileMenuSm="matMenu">
             <button mat-menu-item [routerLink]="['/profile']">Ver Perfil</button>
+            <button mat-menu-item [matMenuTriggerFor]="notificationsMenuSm">
+              <mat-icon>notifications</mat-icon> Notificaciones
+              <span *ngIf="unreadCount > 0" class="notification-badge">{{ unreadCount }}</span>
+            </button>
+            <mat-menu #notificationsMenuSm="matMenu">
+              <app-notifications></app-notifications>
+            </mat-menu>
             <button mat-menu-item (click)="logout()">Cerrar Sesión</button>
           </mat-menu>
         </ng-container>
