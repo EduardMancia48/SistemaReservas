@@ -40,3 +40,12 @@ body {
   font-size: 1rem;
   line-height: 1.25;
 }
+
+/* Corregir el selector CSS */
+.form-floating > input:focus ~ label,
+.form-floating > input:not(:placeholder-shown) ~ label {
+  top: -1rem;
+  left: 0.75rem;
+  font-size: 0.75rem;
+  color: #495057;
+}
