@@ -1,31 +1,70 @@
-<h2>Mis Reservas</h2>
-<ul>
-  <li *ngFor="let reservation of reservations">
-    Sala {{ reservation.sala_id }} reservada desde {{ reservation.fecha_reserva | date }} hasta {{ reservation.hora_inicio }} - {{ reservation.hora_fin }}
-  </li>
-</ul>
+<div class="reservation-list-container">
+  <h2>Reservaciones</h2>
+  <button mat-button (click)="toggleView()">
+    {{ showActive ? 'Ver Archivo' : 'Ver Activas' }}
+  </button>
 
-<div class="container">
-  <h1>Prueba de Estilos de Google Material</h1>
-  <h2>Subtítulo de Prueba</h2>
-  <p>Este es un párrafo de prueba para verificar que las fuentes de Google y los estilos de Material Design se están aplicando correctamente.</p>
+  <div *ngIf="showActive">
+    <h3>Activas</h3>
+    <table mat-table [dataSource]="activeReservations" class="mat-elevation-z8">
+      <!-- Nombre de la Sala Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre de la Sala </th>
+        <td mat-cell *matCellDef="let reservation"> {{ getRoomName(reservation.sala_id) }} </td>
+      </ng-container>
 
-  <!-- Botón de Angular Material -->
-  <button mat-fab extended color="primary">
-    <mat-icon style="font-size: 24px; line-height: 1;">send</mat-icon> <!-- Ajusta el tamaño aquí -->
-    Enviar
-</button>
+      <!-- Fecha de Reserva Column -->
+      <ng-container matColumnDef="fecha_reserva">
+        <th mat-header-cell *matHeaderCellDef> Fecha de Reserva </th>
+        <td mat-cell *matCellDef="let reservation"> {{ formatDate(reservation.fecha_reserva) }} </td>
+      </ng-container>
 
-  <!-- Iconos de Material Design -->
-  <h2>Iconos de Material Design</h2>
-  <mat-icon>face</mat-icon>
-  <mat-icon>favorite</mat-icon>
-  <mat-icon>thumb_up</mat-icon>
+      <!-- Hora Inicio Column -->
+      <ng-container matColumnDef="hora_inicio">
+        <th mat-header-cell *matHeaderCellDef> Hora Inicio </th>
+        <td mat-cell *matCellDef="let reservation"> {{ formatTime(reservation.hora_inicio) }} </td>
+      </ng-container>
 
-  <!-- Ejemplo de Input de Angular Material -->
-  <h2>Ejemplo de Input</h2>
-  <mat-form-field appearance="fill">
-    <mat-label>Nombre</mat-label>
-    <input matInput placeholder="Ingrese su nombre">
-  </mat-form-field>
+      <!-- Hora Fin Column -->
+      <ng-container matColumnDef="hora_fin">
+        <th mat-header-cell *matHeaderCellDef> Hora Fin </th>
+        <td mat-cell *matCellDef="let reservation"> {{ formatTime(reservation.hora_fin) }} </td>
+      </ng-container>
+
+      <!-- Estado de Reserva Column -->
+      <ng-container matColumnDef="estado_reserva">
+        <th mat-header-cell *matHeaderCellDef> Estado de Reserva </th>
+        <td mat-cell *matCellDef="let reservation"> {{ getReservationStatusName(reservation.estado_reserva_id) }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['nombre', 'fecha_reserva', 'hora_inicio', 'hora_fin', 'estado_reserva']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['nombre', 'fecha_reserva', 'hora_inicio', 'hora_fin', 'estado_reserva']"></tr>
+    </table>
+  </div>
+
+  <div *ngIf="!showActive">
+    <h3>Archivo</h3>
+    <table mat-table [dataSource]="archivedReservations" class="mat-elevation-z8">
+      <!-- Nombre de la Sala Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre de la Sala </th>
+        <td mat-cell *matCellDef="let reservation"> {{ getRoomName(reservation.sala_id) }} </td>
+      </ng-container>
+
+      <!-- Fecha de Reserva Column -->
+      <ng-container matColumnDef="fecha_reserva">
+        <th mat-header-cell *matHeaderCellDef> Fecha de Reserva </th>
+        <td mat-cell *matCellDef="let reservation"> {{ formatDate(reservation.fecha_reserva) }} </td>
+      </ng-container>
+
+      <!-- Estado de Reserva Column -->
+      <ng-container matColumnDef="estado_reserva">
+        <th mat-header-cell *matHeaderCellDef> Estado de Reserva </th>
+        <td mat-cell *matCellDef="let reservation"> {{ getReservationStatusName(reservation.estado_reserva_id) }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['nombre', 'fecha_reserva', 'estado_reserva']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['nombre', 'fecha_reserva', 'estado_reserva']"></tr>
+    </table>
+  </div>
 </div>

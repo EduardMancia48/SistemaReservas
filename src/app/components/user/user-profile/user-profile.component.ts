@@ -19,12 +19,13 @@ export class ProfileComponent implements OnInit {
   constructor(private userService: UserService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    const userId = this.authService.getUserId();
-    if (userId !== null) {
-      this.loadUserProfile(userId);
-    } else {
-      console.error('No se pudo obtener el ID del usuario logueado');
-    }
+    this.authService.getUserId().subscribe((userId: number | null) => {
+      if (userId !== null) {
+        this.loadUserProfile(userId);
+      } else {
+        console.error('No se pudo obtener el ID del usuario logueado');
+      }
+    });
   }
 
   loadUserProfile(id: number): void {

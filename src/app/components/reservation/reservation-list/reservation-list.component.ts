@@ -4,6 +4,12 @@ import { Reservation } from '../../../models/reservation';
 import { CommonModule } from '@angular/common';  
 import { RouterModule } from '@angular/router';
 import { materialModules } from '../../../models/material-imports';
+import { AuthService } from '../../../interceptors/auth.service';
+import { RoomService } from '../../../services/room.service';
+import { ReservationStatusService } from '../../../services/reservation-status.service';
+import { Room } from '../../../models/room';
+import { ReservationStatus } from '../../../models/reservation-status';
+import moment from 'moment';
 
 @Component({
     selector: 'app-reservation-list',
@@ -12,19 +18,77 @@ import { materialModules } from '../../../models/material-imports';
     styleUrls: ['./reservation-list.component.css']
 })
 export class ReservationListComponent implements OnInit {
-  reservations: Reservation[] = [];
+  activeReservations: Reservation[] = [];
+  archivedReservations: Reservation[] = [];
+  rooms: Room[] = [];
+  reservationStatuses: ReservationStatus[] = [];
+  showActive: boolean = true;
+  userId: number = 0; // Inicializar la propiedad userId
 
-  constructor(private reservationService: ReservationService) {}
+  constructor(
+    private reservationService: ReservationService,
+    private roomService: RoomService,
+    private reservationStatusService: ReservationStatusService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.getReservations();
+    this.authService.getUserId().subscribe((userId: number | null) => {
+      if (userId !== null) {
+        this.userId = userId;
+        this.getActiveReservations();
+        this.getArchivedReservations();
+        this.loadRooms();
+        this.loadReservationStatuses();
+      } else {
+        console.error('User ID is null');
+      }
+    });
   }
 
-  // Aquí nos suscribimos al servicio para obtener las reservas simuladas
-  getReservations(): void {
-    this.reservationService.getReservations().subscribe(data => {
-      this.reservations = data;  // Asigna los datos a la propiedad 'reservations'
-      console.log('Reservas cargadas:', this.reservations);  // Verifica los datos en la consola
+  getActiveReservations(): void {
+    this.reservationService.getActiveReservationsByUser(this.userId).subscribe(data => {
+      this.activeReservations = data.filter(reservation => reservation.estado_reserva_id === 1);
     });
+  }
+
+  getArchivedReservations(): void {
+    this.reservationService.getArchivedReservationsByUser(this.userId).subscribe(data => {
+      this.archivedReservations = data.filter(reservation => reservation.estado_reserva_id === 2);
+    });
+  }
+
+  loadRooms(): void {
+    this.roomService.getRooms().subscribe(data => {
+      this.rooms = data;
+    });
+  }
+
+  loadReservationStatuses(): void {
+    this.reservationStatusService.getReservationStatuses().subscribe(data => {
+      this.reservationStatuses = data;
+    });
+  }
+
+  getRoomName(roomId: number): string {
+    const room = this.rooms.find(r => r.sala_id === roomId);
+    return room ? room.nombre : 'Desconocida';
+  }
+
+  getReservationStatusName(statusId: number): string {
+    const status = this.reservationStatuses.find(s => s.estado_reserva_id === statusId);
+    return status ? status.estado : 'Desconocido';
+  }
+
+  formatDate(date: string): string {
+    return moment(date).format('DD/MM/YYYY');
+  }
+
+  formatTime(time: string): string {
+    return moment(time, 'HH:mm:ss').format('hh:mm A');
+  }
+
+  toggleView(): void {
+    this.showActive = !this.showActive;
   }
 }

@@ -20,6 +20,18 @@ export class ReservationService {
     return this.http.get<Reservation>(`${this.apiUrl}/${id}`);
   }
 
+  getReservationsByUser(userId: number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiUrl}?usuario_id=${userId}`);
+  }
+
+  getActiveReservationsByUser(userId: number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiUrl}?usuario_id=${userId}&estado_reserva_id=1`);
+  }
+
+  getArchivedReservationsByUser(userId: number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiUrl}?usuario_id=${userId}&estado_reserva_id=2`);
+  }
+
   createReservation(reservation: Reservation): Observable<any> {
     return this.http.post<any>(this.apiUrl, reservation);
   }

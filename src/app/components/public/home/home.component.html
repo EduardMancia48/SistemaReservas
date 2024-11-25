@@ -2,7 +2,7 @@
 <section class="rooms-info">
   <h2>Salas Disponibles</h2>
   <swiper-container [loop]="loop" navigation="true" [breakpoints]="breakpoints">
-    <ng-container *ngFor="let room of availableRooms">
+    <ng-container *ngFor="let room of rooms">
       <swiper-slide>
         <mat-card class="room-card" (click)="openReservationDialog(room)">
           <div class="image-container">

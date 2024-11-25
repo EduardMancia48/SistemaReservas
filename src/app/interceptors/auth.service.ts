@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -57,8 +57,8 @@ export class AuthService {
     return (now - sessionStart) < twentyFourHours;
   }
 
-  getUserId(): number | null {
+  getUserId(): Observable<number | null> {
     const userId = localStorage.getItem('userId');
-    return userId ? parseInt(userId, 10) : null;
+    return of(userId ? parseInt(userId, 10) : null);
   }
 }

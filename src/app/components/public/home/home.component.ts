@@ -27,7 +27,6 @@ register();
 })
 export class HomeComponent implements OnInit, OnDestroy {
   rooms: Room[] = [];
-  availableRooms: Room[] = [];
   ubicaciones: Ubicacion[] = [];
   loop: boolean = true;
   breakpoints = {
@@ -55,8 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.roomService.getRooms().subscribe({
       next: (rooms: Room[]) => {
         this.rooms = rooms;
-        this.availableRooms = rooms.filter(room => room.disponible);
-        this.loop = this.availableRooms.length >= 2;
+        this.loop = this.rooms.length >= 2;
       },
       error: (err) => {
         console.error('Error fetching rooms:', err);
