@@ -20,7 +20,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Hora de Inicio</mat-label>
           <mat-select formControlName="hora_inicio" required (selectionChange)="onHoraInicioChange()">
-            <mat-option *ngFor="let time of availableTimes" [value]="time">{{ time }}</mat-option>
+            <mat-option *ngFor="let time of availableTimes" [value]="time" [disabled]="isTimeOccupied(time)">{{ time }}</mat-option>
           </mat-select>
         </mat-form-field>
 

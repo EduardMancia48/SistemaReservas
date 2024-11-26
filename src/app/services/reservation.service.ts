@@ -32,6 +32,10 @@ export class ReservationService {
     return this.http.get<Reservation[]>(`${this.apiUrl}?usuario_id=${userId}&estado_reserva_id=2`);
   }
 
+  getReservationsByDateAndRoom(salaId: number, fechaReserva: string): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`https://flowery-caterwauling-echium.glitch.me/reservas_por_sala_y_fecha?sala_id=${salaId}&fecha_reserva=${fechaReserva}`);
+  }
+
   createReservation(reservation: Reservation): Observable<any> {
     return this.http.post<any>(this.apiUrl, reservation);
   }

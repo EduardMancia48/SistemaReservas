@@ -7,7 +7,6 @@ import { Reservation } from '../../../models/reservation';
 import { materialModules } from '../../../models/material-imports';
 import moment from 'moment-timezone';
 import { ReservationService } from '../../../services/reservation.service';
-import { ReservationHistoryService } from '../../../services/reservation-history.service';
 import { NotificationService } from '../../../services/notification.service';
 
 @Component({
@@ -25,6 +24,7 @@ export class ReservationCreateComponent implements OnInit {
   minTime: string;
   availableTimes: string[] = [];
   availableEndTimes: string[] = [];
+  occupiedTimes: { start: string, end: string }[] = [];
 
   dialogRef = inject(MatDialogRef<ReservationCreateComponent>);
   data = inject(MAT_DIALOG_DATA);
@@ -67,6 +67,20 @@ export class ReservationCreateComponent implements OnInit {
     for (let hour = startHour; hour <= 22; hour++) {
       this.availableTimes.push(moment({ hour }).format('hh:mm A'));
     }
+
+    this.loadOccupiedTimes();
+  }
+
+  loadOccupiedTimes(): void {
+    const fecha_reserva = moment(this.reservationForm.get('fecha_reserva')?.value).format('YYYY-MM-DD');
+    this.reservationService.getReservationsByDateAndRoom(this.data.room.sala_id, fecha_reserva).subscribe(reservations => {
+      this.occupiedTimes = [];
+      reservations.forEach(reservation => {
+        const startHour = moment(reservation.hora_inicio, 'HH:mm:ss').format('hh:mm A');
+        const endHour = moment(reservation.hora_fin, 'HH:mm:ss').format('hh:mm A');
+        this.occupiedTimes.push({ start: startHour, end: endHour });
+      });
+    });
   }
 
   updateAvailableEndTimes(): void {
@@ -75,8 +89,15 @@ export class ReservationCreateComponent implements OnInit {
     this.availableEndTimes = [];
 
     for (let hour = startHour + 1; hour <= 22; hour++) {
-      this.availableEndTimes.push(moment({ hour }).format('hh:mm A'));
+      const time = moment({ hour }).format('hh:mm A');
+      if (!this.occupiedTimes.some(occupied => moment(time, 'hh:mm A').isBetween(moment(occupied.start, 'hh:mm A'), moment(occupied.end, 'hh:mm A'), null, '[)'))) {
+        this.availableEndTimes.push(time);
+      }
     }
+  }
+
+  isTimeOccupied(time: string): boolean {
+    return this.occupiedTimes.some(occupied => moment(time, 'hh:mm A').isBetween(moment(occupied.start, 'hh:mm A'), moment(occupied.end, 'hh:mm A'), null, '[)'));
   }
 
   onNoClick(): void {
