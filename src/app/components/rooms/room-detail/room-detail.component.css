@@ -50,6 +50,6 @@
   
   .room-card:hover {
 	transform: scale(1.02); /* Opcional: Un pequeño efecto de agrandamiento */
-	box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Opcional: Sombra para resaltar el card */
+	box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Opcional: Sombra para resaltar el card */	
   }
   
