@@ -32,6 +32,23 @@
   .profile-actions button {
     min-width: 120px;
   }
+
+  .custom-button {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    gap: 15px; /* Espaciado entre botones */
+    padding: 10px;
+    margin-top: 20px; /* Opcional: separa los botones del contenido superior */
+  }
+  
+  
+  button[mat-fab] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize; 
+  }
   
   @media (max-width: 600px) {
     .profile-container {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
@@ -11,8 +11,18 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Obtiene todos los usuarios con rol_id = 1.
+   */
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/usuarios`);
+    return this.http.get<User[]>(`${this.apiUrl}/usuarios/user`);
+  }
+
+  /**
+   * Obtiene todos los administradores con rol_id = 2.
+   */
+  getAdmins(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/usuarios/admins`);
   }
 
   getUserById(id: number): Observable<User> {
@@ -37,5 +47,10 @@ export class UserService {
 
   login(loginData: { email: string, password: string }): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/login`, loginData);
+  }
+
+  getUserId(): Observable<number | null> {
+    const userId = localStorage.getItem('userId');
+    return of(userId ? parseInt(userId, 10) : null);
   }
 }

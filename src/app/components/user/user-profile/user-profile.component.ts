@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service'; // Asegúrate de tener este servicio
 import { User } from '../../../models/user';
 import { materialModules } from '../../../models/material-imports';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '../../../interceptors/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
     selector: 'app-user-profile',
-    imports: [materialModules, CommonModule],
+    imports: [materialModules, CommonModule, RouterLink],
     templateUrl: './user-profile.component.html',
     styleUrl: './user-profile.component.css'
 })
