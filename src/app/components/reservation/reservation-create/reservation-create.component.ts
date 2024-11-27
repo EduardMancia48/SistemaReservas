@@ -8,6 +8,8 @@ import { materialModules } from '../../../models/material-imports';
 import moment from 'moment-timezone';
 import { ReservationService } from '../../../services/reservation.service';
 import { NotificationService } from '../../../services/notification.service';
+import { AuthService } from '../../../interceptors/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservation-create',
@@ -31,6 +33,8 @@ export class ReservationCreateComponent implements OnInit {
   fb = inject(FormBuilder);
   reservationService = inject(ReservationService);
   notificationService = inject(NotificationService);
+  authService = inject(AuthService);
+  router = inject(Router);
 
   constructor() {
     this.minDate = new Date(); // Establecer la fecha mínima en la fecha actual
@@ -105,39 +109,48 @@ export class ReservationCreateComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.reservationForm.valid) {
-      const fecha_reserva = moment(this.reservationForm.value.fecha_reserva).format('YYYY-MM-DD');
-      const hora_inicio = moment(this.reservationForm.value.hora_inicio, 'hh:mm A').format('HH:mm:ss');
-      const hora_fin = moment(this.reservationForm.value.hora_fin, 'hh:mm A').format('HH:mm:ss');
+    this.authService.isAuthenticated().subscribe(isAuthenticated => {
+      if (!isAuthenticated) {
+        this.dialogRef.close();
+        this.router.navigate(['/login']);
+        return;
+      }
 
-      const reservation: Reservation = {
-        reserva_id: 0, // Este valor se generará en el backend
-        usuario_id: 1, // Este valor debe ser el ID del usuario logueado
-        sala_id: this.data.room.sala_id,
-        fecha_reserva: fecha_reserva,
-        hora_inicio: hora_inicio,
-        hora_fin: hora_fin,
-        estado_reserva_id: 1 // Estado inicial de la reserva
-      };
+      if (this.reservationForm.valid) {
+        const fecha_reserva = moment(this.reservationForm.value.fecha_reserva).format('YYYY-MM-DD');
+        const hora_inicio = moment(this.reservationForm.value.hora_inicio, 'hh:mm A').format('HH:mm:ss');
+        const hora_fin = moment(this.reservationForm.value.hora_fin, 'hh:mm A').format('HH:mm:ss');
 
-      console.log('Datos de la reserva:', reservation); // Agregar este log para verificar los datos
+        const reservation: Reservation = {
+          reserva_id: 0, // Este valor se generará en el backend
+          usuario_id: 1, // Este valor debe ser el ID del usuario logueado
+          sala_id: this.data.room.sala_id,
+          fecha_reserva: fecha_reserva,
+          hora_inicio: hora_inicio,
+          hora_fin: hora_fin,
+          estado_reserva_id: 1 // Estado inicial de la reserva
+        };
 
-      this.reservationService.createReservation(reservation).subscribe(
-        (response) => {
-          console.log('Reserva y historial creados:', response); // Verificar que el ID de la reserva se obtenga correctamente
-          this.notificationService.addNotification({
-            message: `Haz reservado la sala "${this.data.room.nombre}" con éxito.`,
-            reservationId: response.reservaId,
-            read: false
-          });
-          this.reservationService.scheduleReservationStatusUpdate(response);
-          this.dialogRef.close(response);
-        },
-        (error) => {
-          console.error('Error al crear la reserva:', error); // Agregar este log para verificar el error
-        }
-      );
-    }
+        console.log('Datos de la reserva:', reservation); // Agregar este log para verificar los datos
+
+        this.reservationService.createReservation(reservation).subscribe(
+          (response) => {
+            console.log('Reserva y historial creados:', response); // Verificar que el ID de la reserva se obtenga correctamente
+            this.notificationService.addNotification({
+              message: `Haz reservado la sala "${this.data.room.nombre}" con éxito.`,
+              reservationId: response.reservaId,
+              read: false
+            });
+            this.reservationService.scheduleReservationStatusUpdate(response);
+            this.dialogRef.close(response);
+            this.router.navigate(['/reservations']); // Redirigir a la ruta /reservations
+          },
+          (error) => {
+            console.error('Error al crear la reserva:', error); // Agregar este log para verificar el error
+          }
+        );
+      }
+    });
   }
 
   onFechaReservaChange(): void {

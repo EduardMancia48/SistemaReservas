@@ -11,16 +11,10 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Obtiene todos los usuarios con rol_id = 1.
-   */
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/usuarios/user`);
   }
 
-  /**
-   * Obtiene todos los administradores con rol_id = 2.
-   */
   getAdmins(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/usuarios/admins`);
   }

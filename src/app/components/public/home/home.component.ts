@@ -77,15 +77,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   openReservationDialog(room: Room): void {
-    this.authSubscription = this.authService.isAuthenticated().subscribe(isAuthenticated => {
-      if (isAuthenticated) {
-        this.dialog.open(ReservationCreateComponent, {
-          width: 'auto',
-          data: { room }
-        });
-      } else {
-        this.router.navigate(['/login']);
-      }
+    this.dialog.open(ReservationCreateComponent, {
+      width: 'auto',
+      data: { room }
     });
   }
 

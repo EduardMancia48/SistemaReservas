@@ -19,21 +19,19 @@
       <button mat-raised-button color="primary" (click)="editProfile()">Editar Perfil</button>
       <button mat-raised-button color="warn" (click)="changePassword()">Cambiar Contraseña</button>
     </div>
-    <div class="custom-button">
-      <button mat-fab extended [routerLink]="['/profile/usuarios']" >
-        <mat-icon >person</mat-icon>
+    <div class="custom-button" *ngIf="user?.rol_id === 1">
+      <button mat-fab extended [routerLink]="['/profile/usuarios']">
+        <mat-icon>person</mat-icon>
         Usuarios
       </button>
       <button mat-fab extended [routerLink]="['/profile/administradores']">
         <mat-icon>admin_panel_settings</mat-icon>
         Administrador
       </button>
-      <button mat-fab extended [routerLink]="['/profile/administradores']">
+      <button mat-fab extended [routerLink]="['/profile/roles']">
         <mat-icon>manage_accounts</mat-icon>
         Roles
       </button>
     </div>
-    
   </mat-card-content>
-
 </mat-card>

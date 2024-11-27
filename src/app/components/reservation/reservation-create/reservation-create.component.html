@@ -12,7 +12,7 @@
       <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Fecha de Reserva</mat-label>
-          <input matInput [matDatepicker]="picker1" formControlName="fecha_reserva" [min]="minDate" required readonly (dateChange)="onFechaReservaChange()">
+          <input matInput [matDatepicker]="picker1" formControlName="fecha_reserva" [min]="minDate" required (focus)="picker1.open()" (dateChange)="onFechaReservaChange()">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
