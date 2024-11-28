@@ -1,49 +1,45 @@
-/* room-availability.component.css */
-.room-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell, td.mat-cell {
+  text-align: center;
+}
+
+.available {
+  background-color: #d4edda; /* Verde claro */
+}
+
+.occupied {
+  background-color: #f8d7da; /* Rojo claro */
 }
 
 .room-card {
-  margin: 10px;
-  flex: 1 1 calc(33.333% - 20px); /* Ajusta el ancho de las tarjetas para pantallas grandes */
-  box-sizing: border-box;
-  transition: box-shadow 0.1s ease-in-out;
+  max-width: 400px;
+}
+
+.room-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.room-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.room-card {
+  cursor: pointer; /* Cambia el cursor a pointer */
+  transition: transform 0.2s ease; /* Suaviza el efecto */
 }
 
 .room-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-mat-card-header {
-  display: flex;
-  flex-direction: column;
-}
-
-mat-card-title, mat-card-subtitle {
-  white-space: normal;
-}
-
-@media (max-width: 960px) {
-  .room-card {
-    flex: 1 1 calc(48% - 20px); /* Ajusta el ancho de las tarjetas para pantallas medianas */
-  }
-}
-
-@media (max-width: 600px) {
-  .room-card {
-    flex: 1 1 100%; /* Ajusta el ancho de las tarjetas para pantallas pequeñas */
-  }
-}
-
-/* Clases para el estado de disponibilidad */
-.disponible {
-  background-color: #d4edda; /* Verde claro */
-  border-left: 5px solid #28a745; /* Verde oscuro */
-}
-
-.ocupada {
-  background-color: #f8d7da; /* Rojo claro */
-  border-left: 5px solid #dc3545; /* Rojo oscuro */
+  transform: scale(1.02); /* Opcional: Un pequeño efecto de agrandamiento */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Opcional: Sombra para resaltar el card */
 }

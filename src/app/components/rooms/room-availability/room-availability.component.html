@@ -1,12 +1,40 @@
 <h2>Disponibilidad de Salas</h2>
-<div class="room-list">
-  <mat-card class="room-card" *ngFor="let room of rooms" [ngClass]="{'disponible': room.disponible, 'ocupada': !room.disponible}">
+<div class="table-container">
+  <table mat-table [dataSource]="rooms" class="mat-elevation-z8">
+    <!-- Columna Salas -->
+    <ng-container matColumnDef="sala">
+      <th mat-header-cell *matHeaderCellDef> Salas </th>
+      <td mat-cell *matCellDef="let room"> {{ room.nombre }} </td>
+    </ng-container>
+
+    <!-- Columnas de Horas -->
+    <ng-container *ngFor="let hour of hours" [matColumnDef]="hour">
+      <th mat-header-cell *matHeaderCellDef> {{ hour }} </th>
+      <td mat-cell *matCellDef="let room" [ngClass]="getAvailabilityClass(room, hour)"> </td>
+    </ng-container>
+
+    <!-- Filas y encabezado -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<h2>Salas</h2>
+<div class="room-cards-container">
+  <mat-card class="room-card" appearance="outlined" *ngFor="let room of rooms" (click)="openReservationDialog(room)">
     <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{ room.nombre }}</mat-card-title>
-      <mat-card-subtitle>Capacidad: {{ room.capacidad }} personas</mat-card-subtitle>
+      <mat-card-subtitle>{{ getUbicacionDescripcion(room.ubicacion_id) }}</mat-card-subtitle>
     </mat-card-header>
+
+    <img mat-card-image [src]="room.img" alt="Imagen de la sala" *ngIf="room.img" />
     <mat-card-content>
-      <p>Estado: {{ room.disponible ? 'Disponible' : 'Ocupada' }}</p>
+      <p><strong>Capacidad:</strong> {{ room.capacidad }} Personas</p>
+      <p><strong>Precio:</strong> {{ room.precio | currency }}</p>
+      <p><strong>Actividad:</strong> {{ room.actividad }}</p>
+      <p><strong>Descripción:</strong> {{ room.descripcion }}</p>
+      <p><strong>Disponible:</strong> {{ room.disponible ? 'Sí' : 'No' }}</p>
     </mat-card-content>
   </mat-card>
 </div>
