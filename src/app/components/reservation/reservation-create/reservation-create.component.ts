@@ -40,7 +40,7 @@ export class ReservationCreateComponent implements OnInit {
     this.minDate = new Date(); // Establecer la fecha mínima en la fecha actual
     this.minTime = this.getNextFullHour(); // Establecer la hora mínima en la siguiente hora completa
     this.reservationForm = this.fb.group({
-      fecha_reserva: ['', Validators.required],
+      fecha_reserva: [this.minDate, Validators.required], // Preseleccionar la fecha del día actual
       hora_inicio: ['', Validators.required],
       hora_fin: ['', Validators.required]
     });
@@ -64,7 +64,16 @@ export class ReservationCreateComponent implements OnInit {
 
   updateAvailableTimes(): void {
     const now = moment().tz('America/El_Salvador');
-    const selectedDate = moment(this.reservationForm.get('fecha_reserva')?.value).tz('America/El_Salvador');
+    const selectedDateValue = this.reservationForm.get('fecha_reserva')?.value;
+    if (!selectedDateValue) {
+      console.error('Fecha de reserva inválida:', selectedDateValue);
+      return;
+    }
+    const selectedDate = moment(selectedDateValue).tz('America/El_Salvador');
+    if (!selectedDate.isValid()) {
+      console.error('Fecha de reserva inválida:', selectedDate);
+      return;
+    }
     const startHour = selectedDate.isSame(now, 'day') ? Math.max(8, now.hours() + 1) : 8;
     this.availableTimes = [];
 
@@ -77,6 +86,10 @@ export class ReservationCreateComponent implements OnInit {
 
   loadOccupiedTimes(): void {
     const fecha_reserva = moment(this.reservationForm.get('fecha_reserva')?.value).format('YYYY-MM-DD');
+    if (fecha_reserva === 'Invalid date') {
+      console.error('Fecha de reserva inválida:', fecha_reserva);
+      return;
+    }
     this.reservationService.getReservationsByDateAndRoom(this.data.room.sala_id, fecha_reserva).subscribe(reservations => {
       this.occupiedTimes = [];
       reservations.forEach(reservation => {
@@ -105,7 +118,7 @@ export class ReservationCreateComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(); // Cerrar el modal sin realizar ninguna acción adicional
   }
 
   onSubmit(): void {
