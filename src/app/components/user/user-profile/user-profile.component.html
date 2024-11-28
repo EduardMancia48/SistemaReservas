@@ -12,12 +12,16 @@
           <ng-container *ngIf="user?.rol_id === 1">Administrador</ng-container>
           <ng-container *ngIf="user?.rol_id === 2">Cliente</ng-container>
         </p>
+        <p *ngIf="user?.contacto"><strong>Teléfono:</strong> {{ user?.contacto?.telefono }}</p>
+        <p *ngIf="user?.contacto"><strong>Dirección:</strong> {{ user?.contacto?.direccion }}</p>
+        <p *ngIf="!user?.contacto" class="missing-contact-info">Falta información de contacto</p>
       </div>
     </div>
     <mat-divider></mat-divider>
     <div class="profile-actions" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
       <button mat-raised-button color="primary" (click)="editProfile()">Editar Perfil</button>
       <button mat-raised-button color="warn" (click)="changePassword()">Cambiar Contraseña</button>
+      <button mat-raised-button color="accent" (click)="editContact()">Editar Contacto</button>
     </div>
     <div class="custom-button" *ngIf="user?.rol_id === 1">
       <button mat-fab extended [routerLink]="['/profile/usuarios']">

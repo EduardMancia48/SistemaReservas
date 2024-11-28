@@ -39,6 +39,10 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/profile/${id}`);
   }
 
+  updateUserProfile(id: number, user: Partial<User>): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/profile/${id}`, user);
+  }
+
   login(loginData: { email: string, password: string }): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/login`, loginData);
   }
@@ -48,17 +52,21 @@ export class UserService {
     return of(userId ? parseInt(userId, 10) : null);
   }
 
-    // asignar roles a un usuario
-    assignRole(userId: number, rolId: number): Observable<{ message: string }> {
-      return this.http.put<{ message: string }>(`${this.apiUrl}/usuarios/${userId}/rol`, { rol_id: rolId });
-    }
+  // asignar roles a un usuario
+  assignRole(userId: number, rolId: number): Observable<{ message: string }> {
+    return this.http.put<{ message: string }>(`${this.apiUrl}/usuarios/${userId}/rol`, { rol_id: rolId });
+  }
 
-    getUsers2(): Observable<User[]> {
-      return this.http.get<User[]>(`${this.apiUrl}/usuarios/admins`);
-    }
-    
-    createUser2(user: { nombre: string; email: string; password: string }): Observable<{ message: string }> {
-      return this.http.post<{ message: string }>(`${this.apiUrl}/usuarios`, user);
-    }
-    
+  getUsers2(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/usuarios/admins`);
+  }
+
+  createUser2(user: { nombre: string; email: string; password: string }): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/usuarios`, user);
+  }
+
+  changePassword(currentPassword: string, newPassword: string): Observable<{ message: string }> {
+    const userId = localStorage.getItem('userId');
+    return this.http.put<{ message: string }>(`${this.apiUrl}/usuarios/${userId}/change-password`, { currentPassword, newPassword });
+  }
 }
