@@ -14,7 +14,7 @@ import { AdministradoresListComponent } from './components/user/administradores-
 import { UserLoginComponent } from './components/user/user-login/user-login.component';
 import { UserRegisterComponent } from './components/user/user-register/user-register.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
-
+import { RolesListComponent } from './components/user/roles-list/roles-list.component'
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -29,6 +29,7 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'profile/usuarios', component: UsuariosListComponent },
   { path: 'profile/administradores', component: AdministradoresListComponent },
+  { path: 'profile/roles', component: RolesListComponent},
   { path: 'login', component: UserLoginComponent },
   { path: 'register', component: UserRegisterComponent },
   { path: 'reportes', component: ReportesComponent },

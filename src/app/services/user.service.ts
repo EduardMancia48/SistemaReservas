@@ -47,4 +47,18 @@ export class UserService {
     const userId = localStorage.getItem('userId');
     return of(userId ? parseInt(userId, 10) : null);
   }
+
+    // asignar roles a un usuario
+    assignRole(userId: number, rolId: number): Observable<{ message: string }> {
+      return this.http.put<{ message: string }>(`${this.apiUrl}/usuarios/${userId}/rol`, { rol_id: rolId });
+    }
+
+    getUsers2(): Observable<User[]> {
+      return this.http.get<User[]>(`${this.apiUrl}/usuarios/admins`);
+    }
+    
+    createUser2(user: { nombre: string; email: string; password: string }): Observable<{ message: string }> {
+      return this.http.post<{ message: string }>(`${this.apiUrl}/usuarios`, user);
+    }
+    
 }
