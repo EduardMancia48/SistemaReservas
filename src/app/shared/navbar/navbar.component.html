@@ -11,8 +11,8 @@
           <button mat-menu-item [routerLink]="['/rooms/detail']">Detalle de Sala</button>
         </ng-container>
       </mat-menu>
-      <button mat-button [routerLink]="['/reservations']">Reservaciones</button>
       <ng-container *ngIf="isLoggedIn">
+        <button mat-button [routerLink]="['/reservations']">Reservaciones</button>
         <button mat-button [matMenuTriggerFor]="profileMenu">
           <mat-icon class="profile-icon">account_circle</mat-icon> Perfil
           <span *ngIf="unreadCount > 0" class="notification-dot"></span>
@@ -50,8 +50,8 @@
             <button mat-menu-item [routerLink]="['/rooms/detail']">Detalle de Sala</button>
           </ng-container>
         </mat-menu>
-        <button mat-menu-item [routerLink]="['/reservations']">Reservaciones</button>
         <ng-container *ngIf="isLoggedIn">
+          <button mat-menu-item [routerLink]="['/reservations']">Reservaciones</button>
           <button mat-menu-item [matMenuTriggerFor]="profileMenuSm">
             <mat-icon class="profile-icon">account_circle</mat-icon> Perfil
             <span *ngIf="unreadCount > 0" class="notification-dot"></span>
