@@ -84,7 +84,7 @@ export class ReservationListComponent implements OnInit {
   }
 
   formatDate(date: string): string {
-    return moment(date).format('DD/MM/YYYY');
+    return moment.utc(date).format('DD/MM/YYYY'); // Asegúrate de usar UTC para evitar problemas de zona horaria
   }
 
   formatTime(time: string): string {
