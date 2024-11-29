@@ -58,7 +58,7 @@ export class UserService {
   }
 
   getUsers2(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/usuarios/admins`);
+    return this.http.get<User[]>(`${this.apiUrl}/usuarios/user`);
   }
 
   createUser2(user: { nombre: string; email: string; password: string }): Observable<{ message: string }> {
