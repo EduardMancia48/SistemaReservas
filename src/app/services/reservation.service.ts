@@ -62,4 +62,10 @@ export class ReservationService {
       }, delay);
     }
   }
+
+  getReservationsByDate(fecha_reserva: string): Observable<Reservation[]> {
+    const url = `${this.apiUrl}?fecha_reserva=${fecha_reserva}`;
+    return this.http.get<Reservation[]>(url);
+  }
+
 }

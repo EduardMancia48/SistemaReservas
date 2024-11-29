@@ -10,13 +10,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { Ubicacion } from '../../../models/ubications';
 import { UbicacionService } from '../../../services/ubicacion.service';
 import { ReservationCreateComponent } from '../../reservation/reservation-create/reservation-create.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
   selector: 'app-room-availability',
   templateUrl: './room-availability.component.html',
   styleUrls: ['./room-availability.component.css'],
-  imports: [...materialModules, CommonModule]
+  imports: [...materialModules, CommonModule, FormsModule]
 })
 export class RoomAvailabilityComponent implements OnInit {
   rooms: Room[] = [];
@@ -24,6 +25,8 @@ export class RoomAvailabilityComponent implements OnInit {
   hours: string[] = [];
   displayedColumns: string[] = ['sala'];
   ubicaciones: Ubicacion[] = [];
+  selectedDate: Date = new Date(); // Fecha seleccionada, por defecto hoy
+  minDate: Date = new Date(); // Fecha mínima para el datepicker (hoy)
 
   constructor(
     private roomService: RoomService,
@@ -35,16 +38,17 @@ export class RoomAvailabilityComponent implements OnInit {
   ngOnInit(): void {
     this.initializeHours();
     this.getRooms();
-    this.getReservations();
     this.loadUbicaciones();
+    this.getReservations(); // Obtener reservas para la fecha actual
   }
 
   initializeHours(): void {
     const startHour = 8;
     const endHour = 22;
     for (let hour = startHour; hour < endHour; hour++) {
-      this.hours.push(`${hour}:00 - ${hour + 1}:00`);
-      this.displayedColumns.push(`${hour}:00 - ${hour + 1}:00`);
+      const hourRange = `${hour}:00 - ${hour + 1}:00`;
+      this.hours.push(hourRange);
+      this.displayedColumns.push(hourRange);
     }
   }
 
@@ -55,7 +59,8 @@ export class RoomAvailabilityComponent implements OnInit {
   }
 
   getReservations(): void {
-    this.reservationService.getReservations().subscribe((data: Reservation[]) => {
+    const fecha_reserva = moment(this.selectedDate).format('YYYY-MM-DD');
+    this.reservationService.getReservationsByDate(fecha_reserva).subscribe((data: Reservation[]) => {
       this.reservations = data;
     });
   }
@@ -66,13 +71,20 @@ export class RoomAvailabilityComponent implements OnInit {
     });
   }
 
+  onDateChange(event: any): void {
+    this.selectedDate = event.value;
+    this.getReservations(); // Actualizar las reservas según la nueva fecha
+  }
+
   getUbicacionDescripcion(ubicacion_id: number): string {
     const ubicacion = this.ubicaciones.find(u => u.ubicacion_id === ubicacion_id);
     return ubicacion ? ubicacion.descripcion : 'Desconocida';
   }
 
   getAvailabilityClass(room: Room, hour: string): string {
-    const [startHour, endHour] = hour.split(' - ').map(h => moment(h, 'HH:mm'));
+    const [startHourStr, endHourStr] = hour.split(' - ');
+    const startHour = moment(startHourStr, 'HH:mm');
+    const endHour = moment(endHourStr, 'HH:mm');
     const roomReservations = this.reservations.filter(reservation => reservation.sala_id === room.sala_id);
 
     for (const reservation of roomReservations) {

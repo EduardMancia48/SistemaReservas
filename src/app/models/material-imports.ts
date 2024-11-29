@@ -22,6 +22,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import {MatTimepickerModule} from '@angular/material/timepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 export const materialModules = [
   MatButtonModule,
@@ -48,4 +49,5 @@ export const materialModules = [
   MatPaginatorModule,
   MatSelectModule,
   MatTimepickerModule,
+  MatNativeDateModule,
 ];

@@ -1,4 +1,19 @@
 <h2>Disponibilidad de Salas</h2>
+<div class="date-picker-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Seleccionar Fecha</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [(ngModel)]="selectedDate"
+      [min]="minDate"
+      (dateChange)="onDateChange($event)"
+    >
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+
 <div class="table-container">
   <table mat-table [dataSource]="rooms" class="mat-elevation-z8">
     <!-- Columna Salas -->
