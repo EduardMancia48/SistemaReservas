@@ -36,25 +36,28 @@ export class ReservationListComponent implements OnInit {
     this.authService.getUserId().subscribe((userId: number | null) => {
       if (userId !== null) {
         this.userId = userId;
+        console.log('User ID obtenido:', this.userId); // Agregado para depuración
         this.getActiveReservations();
         this.getArchivedReservations();
         this.loadRooms();
         this.loadReservationStatuses();
       } else {
-        console.error('User ID is null');
+        console.error('User ID es nulo');
       }
     });
   }
 
   getActiveReservations(): void {
     this.reservationService.getActiveReservationsByUser(this.userId).subscribe(data => {
-      this.activeReservations = data.filter(reservation => reservation.estado_reserva_id === 1);
+      this.activeReservations = data;
+      console.log('Reservas Activas del Usuario:', this.activeReservations); // Agregado para depuración
     });
   }
-
+  
   getArchivedReservations(): void {
     this.reservationService.getArchivedReservationsByUser(this.userId).subscribe(data => {
-      this.archivedReservations = data.filter(reservation => reservation.estado_reserva_id === 2);
+      this.archivedReservations = data;
+      console.log('Reservas Archivadas del Usuario:', this.archivedReservations); // Agregado para depuración
     });
   }
 

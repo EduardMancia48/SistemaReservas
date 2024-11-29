@@ -25,10 +25,12 @@ export class ReservationService {
   }
 
   getActiveReservationsByUser(userId: number): Observable<Reservation[]> {
+    // Asegúrate de que el parámetro 'usuario_id' es el que tu API espera
     return this.http.get<Reservation[]>(`${this.apiUrl}?usuario_id=${userId}&estado_reserva_id=1`);
   }
 
   getArchivedReservationsByUser(userId: number): Observable<Reservation[]> {
+    // Asegúrate de que el parámetro 'usuario_id' es el que tu API espera
     return this.http.get<Reservation[]>(`${this.apiUrl}?usuario_id=${userId}&estado_reserva_id=2`);
   }
 
@@ -67,5 +69,4 @@ export class ReservationService {
     const url = `${this.apiUrl}?fecha_reserva=${fecha_reserva}`;
     return this.http.get<Reservation[]>(url);
   }
-
 }
