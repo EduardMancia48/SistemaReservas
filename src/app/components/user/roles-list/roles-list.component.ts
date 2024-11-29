@@ -42,7 +42,7 @@ export class RolesListComponent implements OnInit {
 
   // Cargar solo el rol de Administrador
   loadRoles() {
-    this.roles = [{ rol_id: 2, nombre: 'Administrador' }];
+    this.roles = [{ rol_id: 1, nombre: 'Administrador' }];
     this.isLoading = false;
   }
 
@@ -51,7 +51,7 @@ export class RolesListComponent implements OnInit {
     this.userService.getUsers2().subscribe(
       (usuarios) => {
         // Filtrar usuarios con rol_id = 1 (Cliente)
-        this.usuarios = usuarios.filter(usuario => usuario.rol_id === 1);
+        this.usuarios = usuarios.filter(usuario => usuario.rol_id === 2);
         this.isLoading = false;
       },
       (error) => {
@@ -84,8 +84,8 @@ export class RolesListComponent implements OnInit {
 
   // Obtener el nombre del rol (aunque aquí siempre será Cliente)
   getRoleName(rolId: number): string {
-    if (rolId === 1) return 'Cliente';
-    if (rolId === 2) return 'Administrador';
+    if (rolId === 1) return 'Administrador';
+    if (rolId === 2) return 'Cliente';
     return 'Desconocido';
   }
 }
