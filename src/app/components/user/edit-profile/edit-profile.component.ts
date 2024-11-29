@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
@@ -7,7 +7,7 @@ import { materialModules } from '../../../models/material-imports';
 
 @Component({
   selector: 'app-edit-profile',
-  imports: [...materialModules],
+  imports: [...materialModules, ReactiveFormsModule],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.css'
 })

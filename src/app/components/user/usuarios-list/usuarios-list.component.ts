@@ -4,12 +4,12 @@ import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/user';
 import { materialModules } from '../../../models/material-imports';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
   selector: 'app-usuarios-list',
-  imports: [CommonModule, ...materialModules],
+  imports: [CommonModule, ...materialModules, ReactiveFormsModule],
   templateUrl: './usuarios-list.component.html',
   styleUrls: ['./usuarios-list.component.css']
 })
@@ -62,7 +62,8 @@ export class UsuariosListComponent implements OnInit {
 
 @Component({
   selector: 'edit-user-dialog',
-  imports: [...materialModules],
+  standalone: true,
+  imports: [...materialModules, ReactiveFormsModule],
   template: `
     <h2 mat-dialog-title>Editar Usuario</h2>
     <mat-dialog-content>

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Contact } from '../../../models/user';
 import { ContactService } from '../../../services/contact.service';
@@ -7,7 +7,7 @@ import { materialModules } from '../../../models/material-imports';
 
 @Component({
   selector: 'app-edit-contact',
-  imports: [...materialModules],
+  imports: [...materialModules, ReactiveFormsModule],
   templateUrl: './edit-contact.component.html',
   styleUrl: './edit-contact.component.css'
 })

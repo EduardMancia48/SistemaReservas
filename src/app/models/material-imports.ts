@@ -17,12 +17,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import {MatListModule} from '@angular/material/list';
-import { ReactiveFormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import {MatTimepickerModule} from '@angular/material/timepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 
 export const materialModules = [
   MatButtonModule,
@@ -44,10 +42,8 @@ export const materialModules = [
   MatTooltipModule,
   MatTreeModule,
   MatListModule,
-  ReactiveFormsModule,
   MatOptionModule,
   MatPaginatorModule,
   MatSelectModule,
   MatTimepickerModule,
-  MatNativeDateModule,
 ];

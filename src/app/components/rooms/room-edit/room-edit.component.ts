@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RoomService } from '../../../services/room.service';
 import { Room } from '../../../models/room';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 @Component({
   standalone: true,
     selector: 'app-room-edit',
-    imports: [CommonModule, ...materialModules],
+    imports: [CommonModule, ...materialModules, ReactiveFormsModule],
     templateUrl: './room-edit.component.html',
     styleUrls: ['./room-edit.component.css']
 })

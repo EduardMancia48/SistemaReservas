@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ReporteService } from '../../services/reporte.service';
 import { materialModules } from '../../models/material-imports';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { BaseChartDirective } from 'ng2-charts';
 @Component({
   selector: 'app-reportes',
   standalone: true,
-  imports: [...materialModules, CommonModule, MatNativeDateModule, BaseChartDirective],
+  imports: [...materialModules, CommonModule, MatNativeDateModule, BaseChartDirective, ReactiveFormsModule],
   templateUrl: './reportes.component.html',
   styleUrls: ['./reportes.component.css'],
   providers: [provideNativeDateAdapter()]
@@ -109,19 +109,6 @@ export class ReportesComponent implements OnInit {
           this.barChartLabels = data.map(item => item.ubicacion);
           this.barChartData[0].data = data.map(item => item.total_reservas);
           this.barChartData[0].label = 'Total Reservas';
-        },
-        (error) => {
-          console.error('Error al generar el reporte:', error);
-        }
-      );
-    } else if (this.reporteSeleccionado === 'contactosUsuarios') {
-      this.reporteService.getContactosUsuarios().subscribe(
-        (data) => {
-          this.dataSource = data;
-          this.displayedColumns = ['usuario', 'telefono', 'direccion'];
-          this.barChartLabels = [];
-          this.barChartData[0].data = [];
-          this.barChartData[0].label = '';
         },
         (error) => {
           console.error('Error al generar el reporte:', error);

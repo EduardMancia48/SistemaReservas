@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { materialModules } from '../../../models/material-imports';
 import { CommonModule } from '@angular/common';
@@ -7,10 +7,12 @@ import { RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../interceptors/auth.service';
+
+
 @Component({
   standalone: true,
     selector: 'app-user-login',
-    imports: [materialModules, CommonModule, RouterModule],
+    imports: [materialModules, CommonModule, RouterModule, ReactiveFormsModule],
     templateUrl: './user-login.component.html',
     styleUrl: './user-login.component.css'
 })

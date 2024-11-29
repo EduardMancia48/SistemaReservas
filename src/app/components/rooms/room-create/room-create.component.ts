@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { materialModules } from '../../../models/material-imports';
-import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { FormBuilder,FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoomService } from '../../../services/room.service';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 @Component({
   standalone: true,
     selector: 'app-room-create',
-    imports: [...materialModules, CommonModule],
+    imports: [...materialModules, CommonModule, ReactiveFormsModule],
     templateUrl: './room-create.component.html',
     styleUrl: './room-create.component.css'
 })

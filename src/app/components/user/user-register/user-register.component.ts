@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { materialModules } from '../../../models/material-imports';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/user';
@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   standalone: true,
     selector: 'app-user-register',
-    imports: [materialModules, CommonModule],
+    imports: [materialModules, CommonModule, ReactiveFormsModule],
     templateUrl: './user-register.component.html',
     styleUrl: './user-register.component.css'
 })

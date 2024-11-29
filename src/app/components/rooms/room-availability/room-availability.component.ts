@@ -11,13 +11,14 @@ import { Ubicacion } from '../../../models/ubications';
 import { UbicacionService } from '../../../services/ubicacion.service';
 import { ReservationCreateComponent } from '../../reservation/reservation-create/reservation-create.component';
 import { FormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   standalone: true,
   selector: 'app-room-availability',
   templateUrl: './room-availability.component.html',
   styleUrls: ['./room-availability.component.css'],
-  imports: [...materialModules, CommonModule, FormsModule]
+  imports: [...materialModules, CommonModule, FormsModule, MatNativeDateModule]
 })
 export class RoomAvailabilityComponent implements OnInit {
   rooms: Room[] = [];

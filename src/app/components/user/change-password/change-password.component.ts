@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
 import { materialModules } from '../../../models/material-imports';
@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-change-password',
-  imports: [...materialModules],
+  imports: [...materialModules, ReactiveFormsModule],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.css'
 })
