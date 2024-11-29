@@ -10,6 +10,7 @@ import { ReservationService } from '../../../services/reservation.service';
 import { NotificationService } from '../../../services/notification.service';
 import { AuthService } from '../../../interceptors/auth.service';
 import { Router } from '@angular/router';
+import { switchMap, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-reservation-create',
@@ -122,21 +123,33 @@ export class ReservationCreateComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.authService.isAuthenticated().subscribe(isAuthenticated => {
-      if (!isAuthenticated) {
-        this.dialogRef.close();
-        this.router.navigate(['/login']);
-        return;
-      }
+    this.authService.isAuthenticated().pipe(
+      switchMap(isAuthenticated => {
+        if (!isAuthenticated) {
+          this.dialogRef.close();
+          this.router.navigate(['/login']);
+          return EMPTY;
+        }
 
-      if (this.reservationForm.valid) {
+        if (this.reservationForm.valid) {
+          return this.authService.getUserId();
+        } else {
+          return EMPTY;
+        }
+      }),
+      switchMap(userId => {
+        if (userId === null) {
+          console.error('No se pudo obtener el ID del usuario logueado');
+          return EMPTY;
+        }
+
         const fecha_reserva = moment(this.reservationForm.value.fecha_reserva).format('YYYY-MM-DD');
         const hora_inicio = moment(this.reservationForm.value.hora_inicio, 'hh:mm A').format('HH:mm:ss');
         const hora_fin = moment(this.reservationForm.value.hora_fin, 'hh:mm A').format('HH:mm:ss');
 
         const reservation: Reservation = {
           reserva_id: 0, // Este valor se generará en el backend
-          usuario_id: 1, // Este valor debe ser el ID del usuario logueado
+          usuario_id: userId, // Usar el ID del usuario logueado
           sala_id: this.data.room.sala_id,
           fecha_reserva: fecha_reserva,
           hora_inicio: hora_inicio,
@@ -144,26 +157,26 @@ export class ReservationCreateComponent implements OnInit {
           estado_reserva_id: 1 // Estado inicial de la reserva
         };
 
-        console.log('Datos de la reserva:', reservation); // Agregar este log para verificar los datos
+        console.log('Datos de la reserva:', reservation); // Verificar los datos
 
-        this.reservationService.createReservation(reservation).subscribe(
-          (response) => {
-            console.log('Reserva y historial creados:', response); // Verificar que el ID de la reserva se obtenga correctamente
-            this.notificationService.addNotification({
-              message: `Haz reservado la sala "${this.data.room.nombre}" con éxito.`,
-              reservationId: response.reservaId,
-              read: false
-            });
-            this.reservationService.scheduleReservationStatusUpdate(response);
-            this.dialogRef.close(response);
-            this.router.navigate(['/reservations']); // Redirigir a la ruta /reservations
-          },
-          (error) => {
-            console.error('Error al crear la reserva:', error); // Agregar este log para verificar el error
-          }
-        );
+        return this.reservationService.createReservation(reservation);
+      })
+    ).subscribe(
+      response => {
+        console.log('Reserva y historial creados:', response);
+        this.notificationService.addNotification({
+          message: `Haz reservado la sala "${this.data.room.nombre}" con éxito.`,
+          reservationId: response.reservaId,
+          read: false
+        });
+        this.reservationService.scheduleReservationStatusUpdate(response);
+        this.dialogRef.close(response);
+        this.router.navigate(['/reservations']); // Redirigir a /reservations
+      },
+      error => {
+        console.error('Error al crear la reserva:', error);
       }
-    });
+    );
   }
 
   onFechaReservaChange(): void {

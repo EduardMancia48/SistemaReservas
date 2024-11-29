@@ -4,10 +4,12 @@
 
 table {
   width: 100%;
+  border-collapse: collapse; /* Asegura que los bordes se colapsen en uno solo */
 }
 
 th.mat-header-cell, td.mat-cell {
   text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.12); /* Agrega bordes a todas las celdas */
 }
 
 .available {
@@ -29,17 +31,12 @@ th.mat-header-cell, td.mat-cell {
   padding: 16px;
 }
 
-.room-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
-
 .room-card {
-  cursor: pointer; /* Cambia el cursor a pointer */
-  transition: transform 0.2s ease; /* Suaviza el efecto */
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .room-card:hover {
-  transform: scale(1.02); /* Opcional: Un pequeño efecto de agrandamiento */
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Opcional: Sombra para resaltar el card */
+  transform: scale(1.02);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
